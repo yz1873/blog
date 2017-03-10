@@ -27,4 +27,10 @@ public interface ArticleDao {
      */
     List<Article> queryAll(@Param("offset") int offset, @Param("limit") int limit);
 
+    /**
+     * 查看数据库中文章总数
+     * @return 文章数
+     */
+    int countOfArticle();
+
 }

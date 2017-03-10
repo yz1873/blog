@@ -16,4 +16,10 @@
         ORDER BY create_time DESC
         limit #{offset},#{limit}
     </select>
+
+    <select id="countOfArticle" resultType="int">
+        SELECT COUNT(title) FROM article
+        GROUP BY article_id
+    </select>
+
 </mapper>

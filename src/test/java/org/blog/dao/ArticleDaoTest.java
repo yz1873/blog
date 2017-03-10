@@ -29,6 +29,7 @@ public class ArticleDaoTest {
         long articleId = 1000;
         Article article = articleDao.queryById(articleId);
         System.out.println(article);
+        System.out.println(articleDao.countOfArticle());
     }
 
     @Test
