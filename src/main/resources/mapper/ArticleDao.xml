@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.blog.dao.ArticleDao">
+    <!--目的：为DAO接口方法提供sql语句配置-->
+
+    <select id="queryById" resultType="Article" parameterType="long">
+        SELECT article_id,author_id,title,content,create_time FROM article
+        WHERE article_id = #{articleId}
+    </select>
+
+    <!--虽然queryAll返回的是list，当时list中存放的时article，故resultType填写article即可-->
+    <select id="queryAll" resultType="Article" parameterType="int">
+        SELECT article_id,author_id,title,content,create_time FROM article
+        ORDER BY create_time DESC
+        limit #{offset},#{limit}
+    </select>
+</mapper>
