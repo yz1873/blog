@@ -1,4 +1,3 @@
-<%@ page import="org.blog.dao.AuthorDao" %>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
@@ -24,6 +23,8 @@
     <div class="container navbar-content">
         <a href="#">首页</a>
         <a href="#">关于我们</a>
+        <a class="login" href="#">注册</a>
+        <a class="login" href="#">登录</a>
     </div>
 </nav>
 
@@ -60,13 +61,13 @@
 
                 <div class="about-des">
                     <p>
-                        哈哈哈。</p>
+                        并不知道要写点什么。</p>
                 </div>
             </div>
         </div>
 
         <footer class="copyright">
-            Copyright &nbsp; 2017 DreamBoy All rights reserved.
+            Copyright &nbsp; 2017 YuZhang All rights reserved.
         </footer>
     </div>
 </div>
