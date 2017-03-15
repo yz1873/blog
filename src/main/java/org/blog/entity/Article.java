@@ -11,6 +11,8 @@ public class Article {
 
     private long authorId;  //作者ID
 
+    private String authorName; //作者姓名
+
     private String title; //文章名称
 
     private String content; //文章内容
@@ -31,6 +33,14 @@ public class Article {
 
     public void setAuthorId(long authorId) {
         this.authorId = authorId;
+    }
+
+    public String getAuthorName() {
+        return authorName;
+    }
+
+    public void setAuthorName(String authorName) {
+        this.authorName = authorName;
     }
 
     public String getTitle() {
@@ -62,6 +72,7 @@ public class Article {
         return "Article{" +
                 "articleId=" + articleId +
                 ", authorId=" + authorId +
+                ", authorName='" + authorName + '\'' +
                 ", title='" + title + '\'' +
                 ", content='" + content + '\'' +
                 ", createTime=" + createTime +

@@ -1,3 +1,4 @@
+<%@ page import="org.blog.dao.AuthorDao" %>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
@@ -38,7 +39,8 @@
             <c:forEach items="${list}" var="ba">
                 <div class="news-list-item">
                     <div class="author-time">
-                        <span>慕女神</span> 发表于 <span><fmt:formatDate value="${ba.createTime}" pattern="yyyy-MM-dd HH:mm:ss" /></span>
+                        <span>${ba.authorName}</span> 发表于 <span><fmt:formatDate value="${ba.createTime}"
+                                                                   pattern="yyyy-MM-dd HH:mm:ss"/></span>
                     </div>
                     <div class="news-des">
                         <h3 class="news-title"><i></i><a href="#">${ba.title}</a></h3>
