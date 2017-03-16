@@ -36,4 +36,10 @@ public class BlogController {
 
         return "list"; //根据前面配置的前缀和后缀，此处代表/WEB-INF/jsp/list.jsp
     }
+
+    @RequestMapping(value = "/login", method = RequestMethod.GET)
+    public String login(Model model) {
+
+        return "login";
+    }
 }

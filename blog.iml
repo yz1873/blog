@@ -55,13 +55,6 @@
     <orderEntry type="library" name="Maven: org.springframework:spring-web:4.1.7.RELEASE" level="project" />
     <orderEntry type="library" name="Maven: org.springframework:spring-webmvc:4.1.7.RELEASE" level="project" />
     <orderEntry type="library" name="Maven: org.springframework:spring-test:4.1.7.RELEASE" level="project" />
-    <orderEntry type="library" name="Maven: org.apache.shiro:shiro-all:1.2.2" level="project" />
-    <orderEntry type="library" name="Maven: org.apache.shiro:shiro-guice:1.2.2" level="project" />
-    <orderEntry type="library" name="Maven: org.apache.shiro:shiro-core:1.2.2" level="project" />
-    <orderEntry type="library" name="Maven: commons-beanutils:commons-beanutils:1.8.3" level="project" />
-    <orderEntry type="library" name="Maven: com.google.guava:guava:r09" level="project" />
-    <orderEntry type="library" name="Maven: com.google.inject:guice:3.0" level="project" />
-    <orderEntry type="library" name="Maven: javax.inject:javax.inject:1" level="project" />
-    <orderEntry type="library" name="Maven: com.google.inject.extensions:guice-multibindings:3.0" level="project" />
+    <orderEntry type="library" name="Maven: org.apache.shiro:shiro-al:1.2.2" level="project" />
   </component>
 </module>

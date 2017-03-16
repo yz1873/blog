@@ -27,7 +27,7 @@
         <shiro:hasRole name="admin">
             <a class="login" href="#">注册</a>
         </shiro:hasRole>
-            <a class="login" href="#">登录</a>
+            <a class="login" href="<%=path%>/login">登录</a>
     </div>
 </nav>
 
