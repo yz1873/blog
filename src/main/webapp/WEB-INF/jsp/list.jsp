@@ -1,3 +1,4 @@
+<%@taglib prefix="shiro" uri="http://shiro.apache.org/tags" %>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
@@ -23,8 +24,12 @@
     <div class="container navbar-content">
         <a href="#">首页</a>
         <a href="#">关于我们</a>
-        <a class="login" href="#">注册</a>
-        <a class="login" href="#">登录</a>
+        <shiro:hasRole name="admin">
+            <a class="login" href="#">注册</a>
+        </shiro:hasRole>
+        <shiro:hasPermission name="add">
+            <a class="login" href="#">登录</a>
+        </shiro:hasPermission>
     </div>
 </nav>
 
@@ -41,7 +46,7 @@
                 <div class="news-list-item">
                     <div class="author-time">
                         <span>${ba.authorName}</span> 发表于 <span><fmt:formatDate value="${ba.createTime}"
-                                                                   pattern="yyyy-MM-dd HH:mm:ss"/></span>
+                                                                                pattern="yyyy-MM-dd HH:mm:ss"/></span>
                     </div>
                     <div class="news-des">
                         <h3 class="news-title"><i></i><a href="#">${ba.title}</a></h3>
