@@ -28,4 +28,13 @@ public class AuthorDaoTest {
         String authorName = authorDao.authorNameById(authorId);
         System.out.println(authorName);
     }
+
+    @Test
+    public void testName() throws Exception {
+        String uname = "rabbiton1989";
+        String pwd   = "890924";
+        int a = authorDao.existAuthor(uname,pwd);
+        System.out.println("符合条件的有："+ a + "个");
+
+    }
 }

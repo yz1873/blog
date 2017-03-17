@@ -10,4 +10,9 @@
         WHERE author_id = #{authorId}
     </select>
 
+    <select id="existAuthor" resultType="int" parameterType="String">
+        SELECT COUNT(*) FROM author
+        WHERE username = #{username} AND password = #{password}
+    </select>
+
 </mapper>

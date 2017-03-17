@@ -32,4 +32,12 @@ public interface BlogService {
      * @return
      */
     String getAuthorNameById(long AuthorId);
+
+    /**
+     * 判断用户账号密码是否存在
+     * @param username
+     * @param password
+     * @return
+     */
+    boolean isAuthorExist(String username,String password);
 }

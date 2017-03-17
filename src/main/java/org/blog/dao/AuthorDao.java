@@ -1,5 +1,7 @@
 package org.blog.dao;
 
+import org.apache.ibatis.annotations.Param;
+
 /**
  * Created by Zhang Yu on 2017/3/9.
  */
@@ -12,4 +14,6 @@ public interface AuthorDao {
      * @return 姓名
      */
     String authorNameById(long authorId);
+
+    int existAuthor(@Param("username") String username, @Param("password") String password);
 }

@@ -47,4 +47,9 @@ public class BlogServiceTest {
         String author = blogService.getAuthorNameById(100);
         logger.info("author={}",author);
     }
+
+    @Test
+    public void testName() throws Exception {
+        logger.info("是否存在={}",blogService.isAuthorExist("rabbiton1989","890924"));
+    }
 }

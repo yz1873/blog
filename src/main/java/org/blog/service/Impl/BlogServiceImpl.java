@@ -46,4 +46,10 @@ public class BlogServiceImpl implements BlogService {
     public int getArticleCount() {
         return articleDao.countOfArticle();
     }
+
+    @Override
+    public boolean isAuthorExist(String username, String password) {
+        int num = authorDao.existAuthor(username,password);
+        return num == 1;
+    }
 }

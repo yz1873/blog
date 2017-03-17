@@ -39,7 +39,18 @@ public class BlogController {
 
     @RequestMapping(value = "/login", method = RequestMethod.GET)
     public String login(Model model) {
-
         return "login";
+    }
+
+    @RequestMapping(value = "/submit", method = RequestMethod.POST)
+    public String submit(String username, String password) {
+        boolean isExist = blogService.isAuthorExist(username, password);
+        if(isExist){
+
+        }
+        else {
+
+        }
+        return null;
     }
 }
