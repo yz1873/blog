@@ -31,3 +31,31 @@ INSERT INTO
   author(author_id,author_name,username,password)
 VALUES
   (100,'张宇','rabbiton1989','890924');
+
+
+CREATE TABLE role(
+`role_id` BIGINT NOT NULL COMMENT '角色id',
+`role_name` VARCHAR(30) NOT NULL COMMENT '角色名称',
+PRIMARY KEY(role_id)
+)ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='角色表';
+
+INSERT INTO
+  role(role_id,role_name)
+VALUES
+  (1,'admin'),(2,'manager'),(3,'normal');
+
+
+
+CREATE TABLE author_role(
+`author_role_id` BIGINT NOT NULL AUTO_INCREMENT COMMENT '作者_角色id',
+`author_id` BIGINT NOT NULL COMMENT '作者id',
+`role_id` BIGINT NOT NULL COMMENT '角色id',
+PRIMARY KEY(author_role_id),
+FOREIGN KEY(author_id) REFERENCES author(author_id) ON DELETE CASCADE ON UPDATE CASCADE,
+FOREIGN KEY(role_id) REFERENCES role(role_id) ON DELETE CASCADE ON UPDATE CASCADE
+)ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8 COMMENT='作者_角色表';
+
+INSERT INTO
+  author_role(author_id,role_id)
+VALUES
+  (100,1);

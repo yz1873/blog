@@ -1,5 +1,8 @@
 package org.blog.web;
 
+import org.apache.shiro.SecurityUtils;
+import org.apache.shiro.authc.UsernamePasswordToken;
+import org.apache.shiro.subject.Subject;
 import org.blog.entity.Article;
 import org.blog.service.BlogService;
 import org.slf4j.Logger;
@@ -45,12 +48,16 @@ public class BlogController {
     @RequestMapping(value = "/submit", method = RequestMethod.POST)
     public String submit(String username, String password) {
         boolean isExist = blogService.isAuthorExist(username, password);
-        if(isExist){
-
+        try {
+            if(isExist){
+                UsernamePasswordToken token = new UsernamePasswordToken(username, password);
+                Subject subject = SecurityUtils.getSubject();
+                subject.login(token);
+            }
         }
-        else {
-
+        catch (Exception e){
+            e.printStackTrace();
         }
-        return null;
+        return "list";
     }
 }

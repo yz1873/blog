@@ -1,6 +1,7 @@
 package org.blog.service;
 
 import org.blog.entity.Article;
+import org.blog.entity.Author;
 
 import java.util.List;
 
@@ -40,4 +41,18 @@ public interface BlogService {
      * @return
      */
     boolean isAuthorExist(String username,String password);
+
+
+    /**
+     * 根据username返回作者对象
+     * @return
+     */
+    Author getByUsername(String username);
+
+    /**
+     * 根据authorId返回其角色名称
+     * @param authorId
+     * @return
+     */
+    String getuserRoleName(long authorId);
 }

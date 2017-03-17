@@ -2,7 +2,9 @@ package org.blog.service.Impl;
 
 import org.blog.dao.ArticleDao;
 import org.blog.dao.AuthorDao;
+import org.blog.dao.RoleDao;
 import org.blog.entity.Article;
+import org.blog.entity.Author;
 import org.blog.service.BlogService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -26,6 +28,9 @@ public class BlogServiceImpl implements BlogService {
 
     @Autowired
     private AuthorDao authorDao;
+
+    @Autowired
+    private RoleDao roleDao;
 
     @Override
     public List<Article> getArticleList(int offset, int limit) {
@@ -51,5 +56,15 @@ public class BlogServiceImpl implements BlogService {
     public boolean isAuthorExist(String username, String password) {
         int num = authorDao.existAuthor(username,password);
         return num == 1;
+    }
+
+    @Override
+    public Author getByUsername(String username) {
+        return authorDao.getByUsername(username);
+    }
+
+    @Override
+    public String getuserRoleName(long authorId) {
+        return roleDao.userRoleName(authorId);
     }
 }
