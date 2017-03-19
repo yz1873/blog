@@ -1,8 +1,12 @@
 package org.blog.web;
 
 import org.apache.shiro.SecurityUtils;
+import org.apache.shiro.authc.AuthenticationException;
 import org.apache.shiro.authc.UsernamePasswordToken;
+import org.apache.shiro.config.IniSecurityManagerFactory;
+import org.apache.shiro.mgt.*;
 import org.apache.shiro.subject.Subject;
+import org.apache.shiro.util.Factory;
 import org.blog.entity.Article;
 import org.blog.service.BlogService;
 import org.slf4j.Logger;
@@ -47,17 +51,29 @@ public class BlogController {
 
     @RequestMapping(value = "/submit", method = RequestMethod.POST)
     public String submit(String username, String password) {
+        //1、获取SecurityManager工厂，此处使用Ini配置文件初始化SecurityManager
+        Factory<org.apache.shiro.mgt.SecurityManager> factory =
+                new IniSecurityManagerFactory("classpath:shiro-jdbc-realm.ini");
+
+        //2、得到SecurityManager实例 并绑定给SecurityUtils
+        org.apache.shiro.mgt.SecurityManager securityManager = factory.getInstance();
+        SecurityUtils.setSecurityManager(securityManager);
+
+        //3、得到Subject及创建用户名/密码身份验证Token（即用户身份/凭证）
+        Subject subject = SecurityUtils.getSubject();
+        UsernamePasswordToken token = new UsernamePasswordToken(username, password);
+
         boolean isExist = blogService.isAuthorExist(username, password);
+
         try {
             if(isExist){
-                UsernamePasswordToken token = new UsernamePasswordToken(username, password);
-                Subject subject = SecurityUtils.getSubject();
                 subject.login(token);
             }
         }
-        catch (Exception e){
-            e.printStackTrace();
+        catch (AuthenticationException e){
+            System.out.println("登录失败错误信息");
+            token.clear();
         }
-        return "list";
+        return "redirect:/blog/list";
     }
 }

@@ -28,7 +28,9 @@ public class PermissionsRealm extends AuthorizingRealm {
         }
         String username=(String) principalCollection.fromRealm(getName()).iterator().next();
         //此处连库匹配了登录用户的数据，具体怎么做，需要根据个人需求而定
+        System.out.println("author asd asd asd ");
         Author author = blogService.getByUsername(username);
+        System.out.println(author);
         if(author != null){
             List<String> roles = new ArrayList<String>();
             SimpleAuthorizationInfo info=new SimpleAuthorizationInfo();
@@ -44,6 +46,7 @@ public class PermissionsRealm extends AuthorizingRealm {
     protected AuthenticationInfo doGetAuthenticationInfo(AuthenticationToken authenticationToken) throws AuthenticationException {
         UsernamePasswordToken token = (UsernamePasswordToken) authenticationToken;
         Author author = blogService.getByUsername(token.getUsername());
+        System.out.println(author);
         if (author == null) {
             throw new AuthorizationException();
         }
