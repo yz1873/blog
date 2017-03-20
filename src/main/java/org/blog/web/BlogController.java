@@ -38,7 +38,7 @@ public class BlogController {
 
         int limit = 20;
         //获取列表页
-        List<Article> list = blogService.getArticleList(0,limit);
+        List<Article> list = blogService.getArticleList(0, limit);
         model.addAttribute("list", list);
 
         return "list"; //根据前面配置的前缀和后缀，此处代表/WEB-INF/jsp/list.jsp
@@ -56,10 +56,19 @@ public class BlogController {
         UsernamePasswordToken token = new UsernamePasswordToken(username, password);
 
         try {
-                subject.login(token);
-        }
-        catch (AuthenticationException e){
+            subject.login(token);
+        } catch (AuthenticationException e) {
             System.out.println("登录失败错误信息");
+            token.clear();
+        }
+        return "redirect:/blog/list";
+    }
+
+    @RequestMapping(value = "/logout", method = RequestMethod.GET)
+    public String logout(Model model) {
+        Subject subject = SecurityUtils.getSubject();
+        if (subject.isAuthenticated()) {
+            subject.logout();
         }
         return "redirect:/blog/list";
     }

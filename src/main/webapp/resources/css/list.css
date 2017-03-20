@@ -82,6 +82,19 @@ a {
     margin-bottom: 50px;
 }
 
+.setting .update {
+    color: #191dff;
+    line-height: 54px;
+    display: inline-block;
+    width: 70px;
+    text-align: center;
+    float: right;
+}
+
+.setting .update:hover {
+    color: #7017cc;
+}
+
 .news-list-right {
     float: right;
     width: 229px;

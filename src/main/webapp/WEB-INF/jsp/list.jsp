@@ -24,10 +24,18 @@
     <div class="container navbar-content">
         <a href="#">首页</a>
         <a href="#">关于我们</a>
-        <shiro:hasRole name="admin">
+
+        <shiro:notAuthenticated>
             <a class="login" href="#">注册</a>
-        </shiro:hasRole>
+        </shiro:notAuthenticated>
+
+        <shiro:notAuthenticated>
             <a class="login" href="<%=path%>/blog/login">登录</a>
+        </shiro:notAuthenticated>
+
+        <shiro:authenticated>
+            <a class="login" href="<%=path%>/blog/logout">退出登录</a>
+        </shiro:authenticated>
     </div>
 </nav>
 
@@ -52,6 +60,14 @@
                         <div class="news-content-des">
                                 ${ba.content}
                         </div>
+                    </div>
+                    <div class="setting">
+                        <shiro:hasAnyRoles name="admin,manager">
+                            <a class="update" href="#">删除</a>
+                        </shiro:hasAnyRoles>
+                        <shiro:hasRole name="manager">
+                            <a class="update" href="#">修改</a>
+                        </shiro:hasRole>
                     </div>
                 </div>
             </c:forEach>
