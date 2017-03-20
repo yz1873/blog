@@ -51,28 +51,15 @@ public class BlogController {
 
     @RequestMapping(value = "/submit", method = RequestMethod.POST)
     public String submit(String username, String password) {
-        //1、获取SecurityManager工厂，此处使用Ini配置文件初始化SecurityManager
-        Factory<org.apache.shiro.mgt.SecurityManager> factory =
-                new IniSecurityManagerFactory("classpath:shiro-jdbc-realm.ini");
 
-        //2、得到SecurityManager实例 并绑定给SecurityUtils
-        org.apache.shiro.mgt.SecurityManager securityManager = factory.getInstance();
-        SecurityUtils.setSecurityManager(securityManager);
-
-        //3、得到Subject及创建用户名/密码身份验证Token（即用户身份/凭证）
         Subject subject = SecurityUtils.getSubject();
         UsernamePasswordToken token = new UsernamePasswordToken(username, password);
 
-        boolean isExist = blogService.isAuthorExist(username, password);
-
         try {
-            if(isExist){
                 subject.login(token);
-            }
         }
         catch (AuthenticationException e){
             System.out.println("登录失败错误信息");
-            token.clear();
         }
         return "redirect:/blog/list";
     }

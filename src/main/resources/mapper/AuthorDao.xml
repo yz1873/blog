@@ -10,11 +10,6 @@
         WHERE author_id = #{authorId}
     </select>
 
-    <select id="existAuthor" resultType="int" parameterType="String">
-        SELECT COUNT(*) FROM author
-        WHERE username = #{username} AND password = #{password}
-    </select>
-
     <select id="getByUsername" resultType="Author" parameterType="String">
         SELECT author_id,author_name,username,password FROM author
         WHERE username = #{username}

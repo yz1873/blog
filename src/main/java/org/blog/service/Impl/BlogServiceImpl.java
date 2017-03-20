@@ -53,12 +53,6 @@ public class BlogServiceImpl implements BlogService {
     }
 
     @Override
-    public boolean isAuthorExist(String username, String password) {
-        int num = authorDao.existAuthor(username,password);
-        return num == 1;
-    }
-
-    @Override
     public Author getByUsername(String username) {
         return authorDao.getByUsername(username);
     }

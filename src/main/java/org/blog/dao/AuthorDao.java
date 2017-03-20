@@ -18,5 +18,4 @@ public interface AuthorDao {
 
     Author getByUsername(String username);
 
-    int existAuthor(@Param("username") String username, @Param("password") String password);
 }

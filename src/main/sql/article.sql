@@ -59,3 +59,17 @@ INSERT INTO
   author_role(author_id,role_id)
 VALUES
   (100,1);
+
+
+CREATE TABLE permissions(
+`permission_id` BIGINT NOT NULL AUTO_INCREMENT COMMENT '权限id',
+`role_id` BIGINT NOT NULL COMMENT '角色id',
+`permission_name` VARCHAR(30) NOT NULL COMMENT '权限名称',
+PRIMARY KEY(permission_id),
+FOREIGN KEY(role_id) REFERENCES role(role_id) ON DELETE CASCADE ON UPDATE CASCADE
+)ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8 COMMENT='权限表';
+
+INSERT INTO
+  permissions(role_id,permission_name)
+VALUES
+  (1,'add'),(2,'delete');

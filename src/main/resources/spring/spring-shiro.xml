@@ -4,6 +4,39 @@
        xsi:schemaLocation="http://www.springframework.org/schema/beans
        http://www.springframework.org/schema/beans/spring-beans.xsd">
 
+    <!-- dataSource -->
+    <bean id="dataSource"
+          class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+        <property name="driverClassName" value="com.mysql.jdbc.Driver" />
+        <property name="url" value="jdbc:mysql://localhost:3306/blog" />
+        <property name="username" value="root" />
+        <property name="password" value="" />
+    </bean>
+
+
+    <bean id="jdbcRealm" class="org.apache.shiro.realm.jdbc.JdbcRealm">
+        <property name="permissionsLookupEnabled" value="true">
+        </property>
+
+        <property name="dataSource" ref="dataSource">
+        </property>
+
+        <property name="authenticationQuery"
+                  value="SELECT password FROM author WHERE username = ?">
+        </property>
+
+        <property name="userRolesQuery"
+                  value="SELECT role_name from author_role left join role using(role_id)
+                  left join author using(author_id) WHERE username = ?">
+        </property>
+
+        <property name="permissionsQuery"
+                  value="SELECT permission_name FROM role left join
+                  permissions using(role_id) WHERE role_name = ?">
+        </property>
+    </bean>
+
+
     <bean id="shiroFilter" class="org.apache.shiro.spring.web.ShiroFilterFactoryBean">
         <property name="securityManager" ref="securityManager"/>
         <property name="successUrl" value="/WEB-INF/jsp/list.jsp"/>
@@ -17,6 +50,7 @@
         <property name="filterChainDefinitions">
             <value>
                 /list.jsp=anon
+                /login.jsp=anon
             </value>
         </property>
     </bean>
@@ -28,17 +62,21 @@
 
 
 
+
+
     <bean id="securityManager" class="org.apache.shiro.web.mgt.DefaultWebSecurityManager">
-        <property name="realm" ref="shiroRealm"/>
+        <property name="realm" ref="jdbcRealm"/>
 
         <property name="cacheManager" ref="shiroCacheManager" />
 
     </bean>
 
-    <bean id="shiroRealm" class="org.blog.security.realm.PermissionsRealm"/>
-    <!-- 用户授权信息Cache, 采用EhCache，需要的话就配置上此信息    -->
-    <bean id="shiroCacheManager"  class="org.apache.shiro.cache.MemoryConstrainedCacheManager"   />
 
+
+    <!--<bean id="shiroRealm" class="org.blog.security.realm.PermissionsRealm"/>-->
+    <!--&lt;!&ndash; 用户授权信息Cache, 采用EhCache，需要的话就配置上此信息    &ndash;&gt;-->
+
+    <bean id="shiroCacheManager"  class="org.apache.shiro.cache.MemoryConstrainedCacheManager"   />
 
 
     <bean id="lifecycleBeanPostProcessor" class="org.apache.shiro.spring.LifecycleBeanPostProcessor"/>
@@ -51,7 +89,7 @@
 
     <bean
             class="org.apache.shiro.spring.security.interceptor.AuthorizationAttributeSourceAdvisor">
-        <property name="securityManager" ref="securityManager"/>
-    </bean>
+<property name="securityManager" ref="securityManager"/>
+        </bean>
 
-</beans>
+        </beans>
