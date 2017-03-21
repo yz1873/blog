@@ -1,7 +1,6 @@
-package org.blog.service;
+package com.blog.service;
 
-import org.blog.entity.Article;
-import org.blog.entity.Author;
+import com.blog.entity.Article;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.slf4j.Logger;
@@ -11,8 +10,6 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import java.util.List;
-
-import static org.junit.Assert.*;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 //告诉junit spring配置文件

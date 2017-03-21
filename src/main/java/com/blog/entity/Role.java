@@ -1,4 +1,4 @@
-package org.blog.entity;
+package com.blog.entity;
 
 /**
  * Created by Zhang Yu on 2017/3/17.

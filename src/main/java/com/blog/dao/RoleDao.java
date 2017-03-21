@@ -1,4 +1,4 @@
-package org.blog.dao;
+package com.blog.dao;
 
 /**
  * Created by Zhang Yu on 2017/3/17.

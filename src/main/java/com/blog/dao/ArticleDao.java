@@ -1,7 +1,7 @@
-package org.blog.dao;
+package com.blog.dao;
 
+import com.blog.entity.Article;
 import org.apache.ibatis.annotations.Param;
-import org.blog.entity.Article;
 
 import java.util.List;
 

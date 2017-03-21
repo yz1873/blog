@@ -1,6 +1,6 @@
-package org.blog.dao;
+package com.blog.dao;
 
-import org.blog.entity.Article;
+import com.blog.entity.Article;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.test.context.ContextConfiguration;

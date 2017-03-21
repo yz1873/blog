@@ -1,7 +1,7 @@
-package org.blog.service;
+package com.blog.service;
 
-import org.blog.entity.Article;
-import org.blog.entity.Author;
+import com.blog.entity.Article;
+import com.blog.entity.Author;
 
 import java.util.List;
 

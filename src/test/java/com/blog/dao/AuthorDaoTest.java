@@ -1,4 +1,4 @@
-package org.blog.dao;
+package com.blog.dao;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -7,24 +7,32 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import javax.annotation.Resource;
 
-import static org.junit.Assert.*;
-
+/**
+ * 配置spring和junit整合，junit启动时加载springIOC容器
+ * spring-test,junit
+ */
 //配置spring和junit整合
 @RunWith(SpringJUnit4ClassRunner.class)
 //告诉junit spring配置文件
 @ContextConfiguration({"classpath:spring/spring-dao.xml"})
 
-public class RoleDaoTest {
-
+public class AuthorDaoTest {
 
     //注入Dao实现类依赖
     @Resource
-    private RoleDao roleDao ;
+    private AuthorDao authorDao;
 
     @Test
-    public void testUserRoleName() throws Exception {
+    public void testAuthorNameById() throws Exception {
         long authorId = 100;
-        String roleName = roleDao.userRoleName(authorId);
-        System.out.println("role名称为：" + roleName);
+        String authorName = authorDao.authorNameById(authorId);
+        System.out.println(authorName);
+    }
+
+    @Test
+    public void testName() throws Exception {
+        String uname = "rabbiton1989";
+        String pwd   = "890924";
+
     }
 }

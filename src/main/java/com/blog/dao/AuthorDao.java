@@ -1,7 +1,6 @@
-package org.blog.dao;
+package com.blog.dao;
 
-import org.apache.ibatis.annotations.Param;
-import org.blog.entity.Author;
+import com.blog.entity.Author;
 
 /**
  * Created by Zhang Yu on 2017/3/9.

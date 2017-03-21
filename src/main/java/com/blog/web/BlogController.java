@@ -1,15 +1,11 @@
-package org.blog.web;
+package com.blog.web;
 
+import com.blog.entity.Article;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.AuthenticationException;
 import org.apache.shiro.authc.UsernamePasswordToken;
-import org.apache.shiro.authz.annotation.RequiresRoles;
-import org.apache.shiro.config.IniSecurityManagerFactory;
-import org.apache.shiro.mgt.*;
 import org.apache.shiro.subject.Subject;
-import org.apache.shiro.util.Factory;
-import org.blog.entity.Article;
-import org.blog.service.BlogService;
+import com.blog.service.BlogService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;

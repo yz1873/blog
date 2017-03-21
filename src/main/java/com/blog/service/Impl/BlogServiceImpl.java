@@ -1,11 +1,11 @@
-package org.blog.service.Impl;
+package com.blog.service.Impl;
 
-import org.blog.dao.ArticleDao;
-import org.blog.dao.AuthorDao;
-import org.blog.dao.RoleDao;
-import org.blog.entity.Article;
-import org.blog.entity.Author;
-import org.blog.service.BlogService;
+import com.blog.dao.ArticleDao;
+import com.blog.dao.AuthorDao;
+import com.blog.entity.Article;
+import com.blog.dao.RoleDao;
+import com.blog.entity.Author;
+import com.blog.service.BlogService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
