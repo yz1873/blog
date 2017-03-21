@@ -3,6 +3,7 @@ package org.blog.web;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.AuthenticationException;
 import org.apache.shiro.authc.UsernamePasswordToken;
+import org.apache.shiro.authz.annotation.RequiresRoles;
 import org.apache.shiro.config.IniSecurityManagerFactory;
 import org.apache.shiro.mgt.*;
 import org.apache.shiro.subject.Subject;
@@ -72,4 +73,11 @@ public class BlogController {
         }
         return "redirect:/blog/list";
     }
+
+    @RequiresRoles("admin")
+    @RequestMapping(value = "/aboutUs", method = RequestMethod.GET)
+    public String aboutUs(Model model) {
+        return "aboutUs";
+    }
+
 }

@@ -23,7 +23,7 @@
 <nav class="navbar">
     <div class="container navbar-content">
         <a href="#">首页</a>
-        <a href="#">关于我们</a>
+        <a href="<%=path%>/blog/aboutUs">关于我们</a>
 
         <shiro:notAuthenticated>
             <a class="login" href="#">注册</a>
