@@ -32,39 +32,53 @@ public class BlogController {
     @Autowired
     private BlogService blogService;
 
+    /**
+     * 商品列表页
+     * @param model
+     * @return
+     */
     @RequestMapping(value = "/list", method = RequestMethod.GET)
     public String list(Model model) {
-        //model用于存放所有用于渲染list.jsp的数据
-        //model + list.jsp = ModelAndView
-
         int limit = 20;
         //获取列表页
         List<Article> list = blogService.getArticleList(0, limit);
         model.addAttribute("list", list);
-
         return "list"; //根据前面配置的前缀和后缀，此处代表/WEB-INF/jsp/list.jsp
     }
 
+    /**
+     * 登录界面
+     * @param model
+     * @return
+     */
     @RequestMapping(value = "/login", method = RequestMethod.GET)
     public String login(Model model) {
         return "login";
     }
 
+    /**
+     * 登录界面提交操作，使用shiro验证用户身份
+     * @param username
+     * @param password
+     * @return
+     */
     @RequestMapping(value = "/submit", method = RequestMethod.POST)
     public String submit(String username, String password) {
-
         Subject subject = SecurityUtils.getSubject();
         UsernamePasswordToken token = new UsernamePasswordToken(username, password);
-
         try {
             subject.login(token);
         } catch (AuthenticationException e) {
-            System.out.println("登录失败错误信息");
             token.clear();
         }
         return "redirect:/blog/list";
     }
 
+    /**
+     *
+     * @param model
+     * @return
+     */
     @RequestMapping(value = "/logout", method = RequestMethod.GET)
     public String logout(Model model) {
         Subject subject = SecurityUtils.getSubject();
@@ -74,7 +88,6 @@ public class BlogController {
         return "redirect:/blog/list";
     }
 
-    @RequiresRoles("admin")
     @RequestMapping(value = "/aboutUs", method = RequestMethod.GET)
     public String aboutUs(Model model) {
         return "aboutUs";
