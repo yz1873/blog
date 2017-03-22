@@ -171,7 +171,10 @@ public final class ConfigManager {
 	}
 	
 	private String getConfigPath () {
-		return this.parentPath + File.separator + ConfigManager.configFileName;
+//		return this.parentPath + File.separator + ConfigManager.configFileName;
+		return this.rootPath
+				+ File.separator + "conf"
+				+ File.separator + ConfigManager.configFileName;
 	}
 
 	private String[] getArray ( String key ) {

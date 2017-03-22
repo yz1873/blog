@@ -1,5 +1,6 @@
 package com.blog.web;
 
+import com.baidu.ueditor.ActionEnter;
 import com.blog.entity.Article;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.AuthenticationException;
@@ -14,6 +15,10 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.List;
 
 /**
@@ -30,6 +35,7 @@ public class BlogController {
 
     /**
      * 商品列表页
+     *
      * @param model
      * @return
      */
@@ -44,6 +50,7 @@ public class BlogController {
 
     /**
      * 登录界面
+     *
      * @param model
      * @return
      */
@@ -54,6 +61,7 @@ public class BlogController {
 
     /**
      * 登录界面提交操作，使用shiro验证用户身份
+     *
      * @param username
      * @param password
      * @return
@@ -71,7 +79,6 @@ public class BlogController {
     }
 
     /**
-     *
      * @param model
      * @return
      */
@@ -87,6 +94,33 @@ public class BlogController {
     @RequestMapping(value = "/aboutUs", method = RequestMethod.GET)
     public String aboutUs(Model model) {
         return "aboutUs";
+    }
+
+
+
+    @RequestMapping(value = "/config")
+    public void config(HttpServletRequest request, HttpServletResponse response) {
+
+        response.setContentType("application/json");
+        String rootPath = request.getSession()
+                .getServletContext().getRealPath("/");
+
+        try {
+            String exec = new ActionEnter(request, rootPath).exec();
+            PrintWriter writer = response.getWriter();
+            writer.write(exec);
+            writer.flush();
+            writer.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+    }
+
+
+    @RequestMapping(value = "/ued", method = RequestMethod.GET)
+    public String ued(Model model) {
+        return "ued";
     }
 
 }
