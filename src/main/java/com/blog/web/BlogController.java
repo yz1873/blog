@@ -117,10 +117,13 @@ public class BlogController {
 
     }
 
-
     @RequestMapping(value = "/ued", method = RequestMethod.GET)
     public String ued(Model model) {
         return "ued";
     }
 
+//    @RequestMapping(value = "/submitArticle", method = RequestMethod.POST)
+//    public String submitArticle(String title, String summary,String contents) {
+//
+//    }
 }

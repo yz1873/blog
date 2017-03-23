@@ -15,6 +15,8 @@ public class Article {
 
     private String title; //文章名称
 
+    private String summary; //文章名称
+
     private String content; //文章内容
 
     private Date createTime;  //创建时间
@@ -51,6 +53,14 @@ public class Article {
         this.title = title;
     }
 
+    public String getSummary() {
+        return summary;
+    }
+
+    public void setSummary(String summary) {
+        this.summary = summary;
+    }
+
     public String getContent() {
         return content;
     }
@@ -74,6 +84,7 @@ public class Article {
                 ", authorId=" + authorId +
                 ", authorName='" + authorName + '\'' +
                 ", title='" + title + '\'' +
+                ", summary='" + summary + '\'' +
                 ", content='" + content + '\'' +
                 ", createTime=" + createTime +
                 '}';

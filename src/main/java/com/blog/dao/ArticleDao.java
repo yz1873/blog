@@ -33,4 +33,11 @@ public interface ArticleDao {
      */
     int countOfArticle();
 
+    /**
+     *
+     * @param title
+     * @param summary
+     * @param contents
+     */
+    void insertArticle(String title, String summary,String contents);
 }

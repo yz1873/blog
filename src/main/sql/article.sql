@@ -9,15 +9,16 @@ CREATE TABLE article(
 `article_id` BIGINT NOT NUll AUTO_INCREMENT COMMENT '文章ID',
 `author_id` BIGINT NOT NULL COMMENT '作者id',
 `title` VARCHAR(120) NOT NULL COMMENT '文章标题',
-`content` VARCHAR(2000) NOT NULL COMMENT '文章内容',
+`summary` VARCHAR(500) COMMENT '文章简介',
+`content` VARCHAR(20000) NOT NULL COMMENT '文章内容',
 `create_time` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
 PRIMARY KEY (article_id)
 )ENGINE=INNODB AUTO_INCREMENT=1000 DEFAULT CHARSET=utf8 COMMENT='文章表';
 
 INSERT INTO
-  article(author_id,title,content)
+  article(author_id,title,summary,content)
 VALUES
-  (100,'2月大兴、房山成北京楼市热点 共成交2819套','凭借新产业的引入、区域配套的提升、轨道交通的建设，北京大兴区、房山区楼市开始快速发展。');
+  (100,'2月大兴、房山成北京楼市热点 共成交2819套','2月大兴、房山成北京楼市热点 共成交2819套','凭借新产业的引入、区域配套的提升、轨道交通的建设，北京大兴区、房山区楼市开始快速发展。');
 
 CREATE TABLE author(
 `author_id` BIGINT NOT NULL COMMENT '作者id',
