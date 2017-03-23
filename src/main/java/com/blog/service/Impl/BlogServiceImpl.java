@@ -3,7 +3,6 @@ package com.blog.service.Impl;
 import com.blog.dao.ArticleDao;
 import com.blog.dao.AuthorDao;
 import com.blog.entity.Article;
-import com.blog.dao.RoleDao;
 import com.blog.entity.Author;
 import com.blog.service.BlogService;
 import org.slf4j.Logger;
@@ -28,9 +27,6 @@ public class BlogServiceImpl implements BlogService {
 
     @Autowired
     private AuthorDao authorDao;
-
-    @Autowired
-    private RoleDao roleDao;
 
     @Override
     public List<Article> getArticleList(int offset, int limit) {
@@ -57,8 +53,4 @@ public class BlogServiceImpl implements BlogService {
         return authorDao.getByUsername(username);
     }
 
-    @Override
-    public String getuserRoleName(long authorId) {
-        return roleDao.userRoleName(authorId);
-    }
 }

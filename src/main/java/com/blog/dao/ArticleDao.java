@@ -39,5 +39,5 @@ public interface ArticleDao {
      * @param summary
      * @param contents
      */
-    void insertArticle(String title, String summary,String contents);
+    void insertArticle(String title, String summary, String contents);
 }

@@ -40,10 +40,4 @@ public interface BlogService {
      */
     Author getByUsername(String username);
 
-    /**
-     * 根据authorId返回其角色名称
-     * @param authorId
-     * @return
-     */
-    String getuserRoleName(long authorId);
 }
