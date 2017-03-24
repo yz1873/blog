@@ -40,4 +40,11 @@ public interface BlogService {
      */
     Author getByUsername(String username);
 
+    /**
+     * 根据authorName返回作者对象
+     * @param authorName
+     * @return
+     */
+    Author getByAuthorname(String authorName);
+
 }

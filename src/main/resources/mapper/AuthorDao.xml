@@ -15,4 +15,9 @@
         WHERE username = #{username}
     </select>
 
+    <select id="getByAuthorname" resultType="Author" parameterType="String">
+        SELECT author_id,author_name,username,password FROM author
+        WHERE author_name = #{authorName}
+    </select>
+
 </mapper>

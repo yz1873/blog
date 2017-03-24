@@ -31,8 +31,8 @@ public class AuthorDaoTest {
 
     @Test
     public void testName() throws Exception {
-        String uname = "rabbiton1989";
-        String pwd   = "890924";
+        String uname = "李四";
+        System.out.println(authorDao.getByUsername(uname));
 
     }
 }

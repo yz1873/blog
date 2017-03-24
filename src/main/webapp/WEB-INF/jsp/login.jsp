@@ -14,6 +14,7 @@
 <body>
 <section class="login-form-wrap">
   <h1>欢迎登陆</h1>
+  <div id="accountInfo" style="visibility: hidden;">登录信息出错</div>
   <form class="login-form" method="post" action="<%= path %>/blog/submit">
     <label>
       <input type="text" name="username" required placeholder="账号">
@@ -23,6 +24,7 @@
     </label>
     <input type="submit" value="登陆">
   </form>
+  <a href="<%=path%>/blog/register">无账号，去注册</a>
 </section>
 </body>
 </html>

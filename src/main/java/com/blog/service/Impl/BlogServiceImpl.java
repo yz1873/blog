@@ -53,4 +53,9 @@ public class BlogServiceImpl implements BlogService {
         return authorDao.getByUsername(username);
     }
 
+    @Override
+    public Author getByAuthorname(String authorName) {
+        return authorDao.getByAuthorname(authorName);
+    }
+
 }

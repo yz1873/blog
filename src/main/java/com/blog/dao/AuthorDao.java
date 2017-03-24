@@ -17,4 +17,6 @@ public interface AuthorDao {
 
     Author getByUsername(String username);
 
+    Author getByAuthorname(String authorName);
+
 }
