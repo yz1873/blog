@@ -10,27 +10,27 @@
 
     <!--1.配置数据库相关参数-->
     <!--properties的属性：${url}-->
-    <context:property-placeholder location="classpath:jdbc.properties"/>
+    <!--<context:property-placeholder location="classpath:jdbc.properties"/>-->
 
     <!--2.数据库的连接池-->
-    <bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource">
-        <!--配置连接池属性-->
-        <!--必须在属性前加jdbc. junit测试时才能通过-->
-        <property name="driverClass" value="${jdbc.driver}"/>
-        <property name="jdbcUrl" value="${jdbc.url}"/>
-        <property name="user" value="${jdbc.username}"/>
-        <property name="password" value="${jdbc.password}"/>
+    <!--<bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource">-->
+        <!--&lt;!&ndash;配置连接池属性&ndash;&gt;-->
+        <!--&lt;!&ndash;必须在属性前加jdbc. junit测试时才能通过&ndash;&gt;-->
+        <!--<property name="driverClass" value="${jdbc.driver}"/>-->
+        <!--<property name="jdbcUrl" value="${jdbc.url}"/>-->
+        <!--<property name="user" value="${jdbc.username}"/>-->
+        <!--<property name="password" value="${jdbc.password}"/>-->
 
-        <!--c3p0连接池的私有属性-->
-        <property name="maxPoolSize" value="30"/>
-        <property name="minPoolSize" value="10"/>
-        <!--关闭连接后不自动commit-->
-        <property name="autoCommitOnClose" value="false"/>
-        <!--获取连接超时时间-->
-        <property name="checkoutTimeout" value="1000"/>
-        <!--当获取连接失败重试次数-->
-        <property name="acquireRetryAttempts" value="2"/>
-    </bean>
+        <!--&lt;!&ndash;c3p0连接池的私有属性&ndash;&gt;-->
+        <!--<property name="maxPoolSize" value="30"/>-->
+        <!--<property name="minPoolSize" value="10"/>-->
+        <!--&lt;!&ndash;关闭连接后不自动commit&ndash;&gt;-->
+        <!--<property name="autoCommitOnClose" value="false"/>-->
+        <!--&lt;!&ndash;获取连接超时时间&ndash;&gt;-->
+        <!--<property name="checkoutTimeout" value="1000"/>-->
+        <!--&lt;!&ndash;当获取连接失败重试次数&ndash;&gt;-->
+        <!--<property name="acquireRetryAttempts" value="2"/>-->
+    <!--</bean>-->
 
     <!--3.配置SqlSessionFactory对象-->
     <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">

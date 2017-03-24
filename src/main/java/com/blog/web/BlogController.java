@@ -1,6 +1,7 @@
 package com.blog.web;
 
 import com.baidu.ueditor.ActionEnter;
+import com.blog.dto.SeckResult;
 import com.blog.entity.Article;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.AuthenticationException;
@@ -12,8 +13,10 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.imageio.ImageIO;
 import javax.servlet.http.HttpServletRequest;
@@ -22,6 +25,7 @@ import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.net.URLDecoder;
 import java.util.List;
 import java.util.Random;
 
@@ -194,54 +198,53 @@ public class BlogController {
         return "register";
     }
 
-    /**
-     * 注册提交
-     *
-     * @param request
-     * @param response
-     */
-    @RequestMapping(value = "/registerSubmit")
-    public void registerSubmit(HttpServletRequest request, HttpServletResponse response) {
+
+    //不需要model，直接返回json
+    //ajax ,json暴露秒杀接口的方法
+    @RequestMapping(value = "/{authorname}/{username}/{checkcode}/registerSubmit", method = RequestMethod.POST,
+            produces = {"application/json;charset=UTF-8"})
+    //produces告诉浏览器我们的content的type，为application/json
+    @ResponseBody //当springmvc看到这个注解时，会试图将我们的返回类型(SeckillResult<Exposer>)包装成json
+    public SeckResult registerSubmit(@PathVariable("authorname") String authorname,
+                                     @PathVariable("username") String username,
+                                     @PathVariable("checkcode") String checkcode,
+                                     HttpServletRequest request) {
         boolean usernameQualified = false;
         boolean authorNameQualified = false;
         boolean checkcodeQualified = false;
         try {
             request.setCharacterEncoding("gbk");
-            response.setContentType("text/html;charset=gbk");
-            PrintWriter out = response.getWriter();
-            String username = request.getParameter("username");
-            String authorName = request.getParameter("authorName");
-            String checkcode = request.getParameter("checkcode");
-
-            if(blogService.getByUsername(username) != null){
+            if (blogService.getByUsername(username) != null) {
                 usernameQualified = true;
             }
-
-            if(blogService.getByAuthorname(authorName) != null){
+            System.out.println("现在作者名为："+authorname);
+            String an = java.net.URLDecoder.decode(authorname, "utf8");
+            System.out.println("Decode后作者名为："+an);
+            System.out.println(blogService.getByAuthorname("张宇"));
+            if (blogService.getByAuthorname(an) != null) {
                 authorNameQualified = true;
             }
-
             String piccode = (String) request.getSession().getAttribute("piccode");//取得图片中的字符串//取得用户输入的字符串
             checkcode = checkcode.toUpperCase();
             if (checkcode.equals(piccode)) checkcodeQualified = true;
 
-            if(usernameQualified){
-                out.println("用户名重复！请更换！");
+            if (usernameQualified) {
+                System.out.println("用户名重复！请更换！");
+                return new SeckResult(false,"用户名重复！请更换！");
+            } else if (authorNameQualified) {
+                System.out.println("昵称重复！请更换！");
+                return new SeckResult(false,"昵称重复！请更换！");
+            } else if (!checkcodeQualified) {
+                System.out.println("验证码错误！");
+                return new SeckResult(false,"验证码错误！");
+            } else {
+                System.out.println("注册成功！");
+                return new SeckResult(true,"注册成功！");
             }
-            else if(authorNameQualified){
-                out.println("昵称重复！请更换！");
-            }
-            else if(!checkcodeQualified){
-                out.println("验证码错误！");
-            }
-            else {
-                out.println("注册成功！");
-            }
-            out.close();
-        }
-        catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
+        return new SeckResult(false,"未知错误！");
     }
 
 }

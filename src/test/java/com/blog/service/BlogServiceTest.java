@@ -47,6 +47,6 @@ public class BlogServiceTest {
 
     @Test
     public void testName() throws Exception {
-        logger.info("是否存在={}",blogService.getByUsername("123"));
+        logger.info("是否存在={}",blogService.getByAuthorname("张宇"));
     }
 }
