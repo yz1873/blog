@@ -225,20 +225,16 @@ public class BlogController {
             checkcode = checkcode.toUpperCase();
             if (checkcode.equals(piccode)) checkcodeQualified = true;
 
-            if(!usernameQualified){
-                System.out.println("用户名重复！请更换！");
+            if(usernameQualified){
                 out.println("用户名重复！请更换！");
             }
-            else if(!authorNameQualified){
-                System.out.println("昵称重复！请更换！");
+            else if(authorNameQualified){
                 out.println("昵称重复！请更换！");
             }
             else if(!checkcodeQualified){
-                System.out.println("验证码错误！");
                 out.println("验证码错误！");
             }
             else {
-                System.out.println("注册成功！");
                 out.println("注册成功！");
             }
             out.close();
