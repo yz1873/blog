@@ -204,7 +204,7 @@ public class BlogController {
     @RequestMapping(value = "/{authorname}/{username}/{checkcode}/registerSubmit", method = RequestMethod.POST,
             produces = {"application/json;charset=UTF-8"})
     //produces告诉浏览器我们的content的type，为application/json
-    @ResponseBody //当springmvc看到这个注解时，会试图将我们的返回类型(SeckillResult<Exposer>)包装成json
+    @ResponseBody //当springmvc看到这个注解时，会试图将我们的返回类型包装成json
     public SeckResult registerSubmit(@PathVariable("authorname") String authorname,
                                      @PathVariable("username") String username,
                                      @PathVariable("checkcode") String checkcode,
@@ -217,10 +217,7 @@ public class BlogController {
             if (blogService.getByUsername(username) != null) {
                 usernameQualified = true;
             }
-            System.out.println("现在作者名为："+authorname);
             String an = java.net.URLDecoder.decode(authorname, "utf8");
-            System.out.println("Decode后作者名为："+an);
-            System.out.println(blogService.getByAuthorname("张宇"));
             if (blogService.getByAuthorname(an) != null) {
                 authorNameQualified = true;
             }
@@ -229,16 +226,12 @@ public class BlogController {
             if (checkcode.equals(piccode)) checkcodeQualified = true;
 
             if (usernameQualified) {
-                System.out.println("用户名重复！请更换！");
                 return new SeckResult(false,"用户名重复！请更换！");
             } else if (authorNameQualified) {
-                System.out.println("昵称重复！请更换！");
                 return new SeckResult(false,"昵称重复！请更换！");
             } else if (!checkcodeQualified) {
-                System.out.println("验证码错误！");
                 return new SeckResult(false,"验证码错误！");
             } else {
-                System.out.println("注册成功！");
                 return new SeckResult(true,"注册成功！");
             }
         } catch (Exception e) {

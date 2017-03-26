@@ -20,32 +20,39 @@
         }
         //检查重复
         function registerSubmit() {
+            var gonext = false;
             var nickname = $("input[name='nickname']").val();
             var username = $("input[name='username']").val();
             var checkcode = $("input[name='checkcode']").val();
             var authorname = encodeURI(encodeURI(nickname));
             var killUrl = '/blog/'+authorname+'/'+username+'/'+checkcode+'/registerSubmit';
-            $.post(killUrl, {}, function (result) {
-
+            $.post(killUrl, function (result) {
+                if(result['success']){
+                    gonext = true;
+                }
+                else{
+                    $('#accountInfo').html(result['message']).show();
+                    gonext = false;
+                }
             });
-            return true;
+            return gonext;
         }
     </script>
 </head>
 <body>
 <section class="login-form-wrap">
     <h1>欢迎注册</h1>
-    <div id="accountInfo" style="visibility: hidden;">注册信息出错</div>
+    <%--<div id="accountInfo" style="visibility: hidden;">注册信息出错</div>--%>
     <%--onsubmit标签在提交提交表单是触发，函数 checkForm() 在提交按钮被点击时触发。此函数向用户显示一段消息。--%>
-    <form class="login-form" method="post" action="<%= path %>/blog/registerSubmit" onsubmit="return registerSubmit()">
+    <form class="login-form" method="post" action="#" onsubmit="return registerSubmit()">
         <label>
-            <input type="text" name="nickname"  required placeholder="昵称">
+            <input type="text" name="nickname"  id="nickname" required placeholder="昵称">
         </label>
         <label>
-            <input type="text" name="username"  required placeholder="登录账号">
+            <input type="text" name="username" id="username"  required placeholder="登录账号">
         </label>
         <label>
-            <input type="text" name="password"  required placeholder="密码">
+            <input type="text" name="password" id="password" required placeholder="密码">
         </label>
         <label>
             <input type="text" name="checkcode" id="checkcode" required placeholder="验证码">
@@ -56,6 +63,7 @@
     </form>
     <a href="<%=path%>/blog/login" >已有账号，去登录</a>
 </section>
+<div id="accountInfo" style="display: none">注册信息出错!</div>
 </body>
 </html>
 
