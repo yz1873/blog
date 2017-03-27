@@ -36,6 +36,10 @@
         <shiro:authenticated>
             <a class="login" href="<%=path%>/blog/logout">退出登录</a>
         </shiro:authenticated>
+
+        <shiro:hasRole name="manager">
+            <a class="login" href="<%=path%>/blog/logout">我的文章列表</a>
+        </shiro:hasRole>
     </div>
 </nav>
 
