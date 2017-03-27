@@ -6,13 +6,13 @@
     <!--目的：为DAO接口方法提供sql语句配置-->
 
     <select id="queryById" resultType="Article" parameterType="long">
-        SELECT a.article_id,a.author_id,b.author_name,a.title,a.content,a.create_time FROM article AS a LEFT JOIN author AS b ON a.author_id = b.author_id
+        SELECT a.article_id,a.author_id,b.author_name,a.title,a.summary,a.content,a.create_time FROM article AS a LEFT JOIN author AS b ON a.author_id = b.author_id
         WHERE article_id = #{articleId}
     </select>
 
     <!--虽然queryAll返回的是list，当时list中存放的时article，故resultType填写article即可-->
     <select id="queryAll" resultType="Article" parameterType="int">
-        SELECT a.article_id,a.author_id,b.author_name,a.title,a.content,a.create_time FROM article AS a LEFT JOIN author AS b ON a.author_id = b.author_id
+        SELECT a.article_id,a.author_id,b.author_name,a.title,a.summary,a.content,a.create_time FROM article AS a LEFT JOIN author AS b ON a.author_id = b.author_id
         ORDER BY a.create_time DESC
         limit #{offset},#{limit}
     </select>

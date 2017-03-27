@@ -128,16 +128,18 @@ a {
 .news-title a:hover {
     text-decoration: underline;
 }
-.news-content-des {
+.news-summary-des {
+    text-indent:2em;
     line-height: 28px;
     overflow : hidden;
     text-overflow: ellipsis;
     display: -webkit-box;
     -webkit-line-clamp: 3;
     -webkit-box-orient: vertical;
-    /*text-overflow:ellipsis;*/
-    /*white-space:nowrap;*/
-    /*overflow:hidden;*/
+}
+.news-content-des {
+    line-height: 28px;
+    text-indent:2em;
 }
 
 .copyright {

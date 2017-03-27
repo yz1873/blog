@@ -22,6 +22,7 @@ import javax.imageio.ImageIO;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.awt.*;
+import java.awt.datatransfer.StringSelection;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -42,16 +43,34 @@ public class BlogController {
     private BlogService blogService;
 
     /**
-     * 商品列表页
+     * 文章列表页按页码
      *
      * @param model
      * @return
      */
     @RequestMapping(value = "/list", method = RequestMethod.GET)
-    public String list(Model model) {
+    public String list(Model model,HttpServletRequest request) {
+        String username =(String)request.getSession().getAttribute("username");
+        model.addAttribute("username", username);
         int limit = 20;
         //获取列表页
         List<Article> list = blogService.getArticleList(0, limit);
+        model.addAttribute("list", list);
+        return "list"; //根据前面配置的前缀和后缀，此处代表/WEB-INF/jsp/list.jsp
+    }
+
+    /**
+     * 文章列表页按页码
+     *
+     * @param model
+     * @return
+     */
+    @RequestMapping(value = "/list/{pageNumber}", method = RequestMethod.GET)
+    public String listByPageNumber(Model model,@PathVariable("pageNumber") int pageNumber) {
+        int limit = 20;
+        int offset = pageNumber*limit;
+        //获取列表页
+        List<Article> list = blogService.getArticleList(offset, limit);
         model.addAttribute("list", list);
         return "list"; //根据前面配置的前缀和后缀，此处代表/WEB-INF/jsp/list.jsp
     }
@@ -75,7 +94,8 @@ public class BlogController {
      * @return
      */
     @RequestMapping(value = "/submit", method = RequestMethod.POST)
-    public String submit(String username, String password) {
+    public String submit(String username, String password,HttpServletRequest request) {
+        request.getSession().setAttribute("username",username);
         Subject subject = SecurityUtils.getSubject();
         UsernamePasswordToken token = new UsernamePasswordToken(username, password);
         try {
@@ -199,6 +219,14 @@ public class BlogController {
     }
 
 
+    /**
+     * ajax请求返回能否注册
+     * @param authorname
+     * @param username
+     * @param checkcode
+     * @param request
+     * @return
+     */
     //不需要model，直接返回json
     //ajax ,json暴露秒杀接口的方法
     @RequestMapping(value = "/{authorname}/{username}/{checkcode}/registerSubmit", method = RequestMethod.POST,
@@ -238,6 +266,16 @@ public class BlogController {
             e.printStackTrace();
         }
         return new SeckResult(false,"未知错误！");
+    }
+
+
+    @RequestMapping(value = "/{articleId}/content", method = RequestMethod.GET)
+    public String articleById(Model model,@PathVariable("articleId") int articleId) {
+
+        //获取列表页
+        Article article = blogService.getArticleById(articleId);
+        model.addAttribute("article", article);
+        return "content"; //根据前面配置的前缀和后缀，此处代表/WEB-INF/jsp/list.jsp
     }
 
 }

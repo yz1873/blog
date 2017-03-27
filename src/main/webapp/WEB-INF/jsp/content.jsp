@@ -42,36 +42,31 @@
 <img src="<%= basePath %>resources/images/bg.jpg" class="index-bg">
 
 <div class="container">
-    <h1>BLOG文章汇聚</h1>
+    <h1>BLOG系统</h1>
     <h4></h4>
 
     <div class="news-list">
         <div class="news-list-left">
-
-            <c:forEach items="${list}" var="ba">
-                <div class="news-list-item">
-                    <div class="author-time">
-                        <span>${ba.authorName}</span> 发表于 <span><fmt:formatDate value="${ba.createTime}"
-                                                                                pattern="yyyy-MM-dd HH:mm:ss"/></span>
-                    </div>
-                    <div class="news-des">
-                        <h3 class="news-title"><i></i><a href="<%=path%>/blog/${ba.articleId}/content">${ba.title}</a>
-                        </h3>
-
-                        <div class="news-summary-des">
-                                ${ba.summary}
-                        </div>
-                    </div>
-                    <div class="setting">
-                        <shiro:hasAnyRoles name="admin,manager">
-                            <a class="update" href="#">删除</a>
-                        </shiro:hasAnyRoles>
-                        <shiro:hasRole name="manager">
-                            <a class="update" href="#">修改</a>
-                        </shiro:hasRole>
+            <div class="news-list-item">
+                <div class="author-time">
+                    <span>${article.authorName}</span> 发表于 <span><fmt:formatDate value="${article.createTime}"
+                                                                            pattern="yyyy-MM-dd HH:mm:ss"/></span>
+                </div>
+                <div class="news-des">
+                    <h3 class="news-title"><i></i><a href="#">${article.title}</a></h3>
+                    <div class="news-content-des">
+                        ${article.content}
                     </div>
                 </div>
-            </c:forEach>
+                <div class="setting">
+                    <shiro:hasAnyRoles name="admin,manager">
+                        <a class="update" href="#">删除</a>
+                    </shiro:hasAnyRoles>
+                    <shiro:hasRole name="manager">
+                        <a class="update" href="#">修改</a>
+                    </shiro:hasRole>
+                </div>
+            </div>
 
         </div>
 
@@ -93,3 +88,4 @@
 </div>
 </body>
 </html>
+
