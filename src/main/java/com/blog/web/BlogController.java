@@ -49,8 +49,8 @@ public class BlogController {
      * @return
      */
     @RequestMapping(value = "/list", method = RequestMethod.GET)
-    public String list(Model model,HttpServletRequest request) {
-        String username =(String)request.getSession().getAttribute("username");
+    public String list(Model model, HttpServletRequest request) {
+        String username = (String) request.getSession().getAttribute("username");
         model.addAttribute("username", username);
         int limit = 20;
         //获取列表页
@@ -66,9 +66,9 @@ public class BlogController {
      * @return
      */
     @RequestMapping(value = "/list/{pageNumber}", method = RequestMethod.GET)
-    public String listByPageNumber(Model model,@PathVariable("pageNumber") int pageNumber) {
+    public String listByPageNumber(Model model, @PathVariable("pageNumber") int pageNumber) {
         int limit = 20;
-        int offset = pageNumber*limit;
+        int offset = pageNumber * limit;
         //获取列表页
         List<Article> list = blogService.getArticleList(offset, limit);
         model.addAttribute("list", list);
@@ -86,6 +86,21 @@ public class BlogController {
         return "login";
     }
 
+
+    @RequestMapping(value = "/{username}/{password}/loginSubmit", method = RequestMethod.POST,
+            produces = {"application/json;charset=UTF-8"})
+    //produces告诉浏览器我们的content的type，为application/json
+    @ResponseBody //当springmvc看到这个注解时，会试图将我们的返回类型包装成json
+    public SeckResult loginSubmit(@PathVariable("username") String username,
+                                  @PathVariable("password") String password) {
+        if (blogService.getByUsernameAndPassword(username,password) != null) {
+            return new SeckResult(true, "验证通过！");
+        }
+        else {
+            return new SeckResult(false, "用户名不存在或密码出错！");
+        }
+    }
+
     /**
      * 登录界面提交操作，使用shiro验证用户身份
      *
@@ -94,8 +109,8 @@ public class BlogController {
      * @return
      */
     @RequestMapping(value = "/submit", method = RequestMethod.POST)
-    public String submit(String username, String password,HttpServletRequest request) {
-        request.getSession().setAttribute("username",username);
+    public String submit(String username, String password, HttpServletRequest request) {
+        request.getSession().setAttribute("username", username);
         Subject subject = SecurityUtils.getSubject();
         UsernamePasswordToken token = new UsernamePasswordToken(username, password);
         try {
@@ -221,6 +236,7 @@ public class BlogController {
 
     /**
      * ajax请求返回能否注册
+     *
      * @param authorname
      * @param username
      * @param checkcode
@@ -254,23 +270,23 @@ public class BlogController {
             if (checkcode.equals(piccode)) checkcodeQualified = true;
 
             if (usernameQualified) {
-                return new SeckResult(false,"用户名重复！请更换！");
+                return new SeckResult(false, "用户名重复！请更换！");
             } else if (authorNameQualified) {
-                return new SeckResult(false,"昵称重复！请更换！");
+                return new SeckResult(false, "昵称重复！请更换！");
             } else if (!checkcodeQualified) {
-                return new SeckResult(false,"验证码错误！");
+                return new SeckResult(false, "验证码错误！");
             } else {
-                return new SeckResult(true,"注册成功！");
+                return new SeckResult(true, "注册成功！");
             }
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return new SeckResult(false,"未知错误！");
+        return new SeckResult(false, "未知错误！");
     }
 
 
     @RequestMapping(value = "/{articleId}/content", method = RequestMethod.GET)
-    public String articleById(Model model,@PathVariable("articleId") int articleId) {
+    public String articleById(Model model, @PathVariable("articleId") int articleId) {
 
         //获取列表页
         Article article = blogService.getArticleById(articleId);

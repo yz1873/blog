@@ -58,4 +58,8 @@ public class BlogServiceImpl implements BlogService {
         return authorDao.getByAuthorname(authorName);
     }
 
+    @Override
+    public Author getByUsernameAndPassword(String username, String password) {
+        return authorDao.getByUsernameAndPassword(username,password);
+    }
 }

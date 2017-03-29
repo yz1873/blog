@@ -14,7 +14,7 @@ import javax.annotation.Resource;
 //配置spring和junit整合
 @RunWith(SpringJUnit4ClassRunner.class)
 //告诉junit spring配置文件
-@ContextConfiguration({"classpath:spring/spring-dao.xml"})
+@ContextConfiguration({"classpath:spring/spring-dao.xml","classpath:spring/spring-shiro.xml"})
 
 public class AuthorDaoTest {
 
@@ -24,7 +24,7 @@ public class AuthorDaoTest {
 
     @Test
     public void testAuthorNameById() throws Exception {
-        long authorId = 100;
+        long authorId = 1;
         String authorName = authorDao.authorNameById(authorId);
         System.out.println(authorName);
     }
@@ -32,7 +32,8 @@ public class AuthorDaoTest {
     @Test
     public void testName() throws Exception {
         String uname = "李四";
-        System.out.println(authorDao.getByUsername(uname));
+        String pass = "890924";
+        System.out.println(authorDao.getByUsernameAndPassword(uname,pass));
 
     }
 }

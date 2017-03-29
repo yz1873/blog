@@ -25,8 +25,8 @@
             var username = $("input[name='username']").val();
             var checkcode = $("input[name='checkcode']").val();
             var authorname = encodeURI(encodeURI(nickname));
-            var killUrl = '/blog/'+authorname+'/'+username+'/'+checkcode+'/registerSubmit';
-            $.post(killUrl, function (result) {
+            var Url = '/blog/'+authorname+'/'+username+'/'+checkcode+'/registerSubmit';
+            $.post(Url, function (result) {
                 if(result['success']){
                     gonext = true;
                 }

@@ -47,4 +47,12 @@ public interface BlogService {
      */
     Author getByAuthorname(String authorName);
 
+    /**
+     * 判断账号和密码是否正确
+     * @param username
+     * @param password
+     * @return
+     */
+    Author getByUsernameAndPassword(String username,String password);
+
 }
