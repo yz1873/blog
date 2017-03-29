@@ -44,7 +44,7 @@
   </form>
   <a href="<%=path%>/blog/register">无账号，去注册</a>
 </section>
-<div id="accountInfo" style="display: none">用户名不存在或密码出错！</div>
+<div id="accountInfo" style="display: none">用户名不存在或密码出错！?</div>
 </body>
 </html>
 
