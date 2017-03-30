@@ -13,26 +13,42 @@
     <!-- End of Libraries -->
     <script type="text/javascript">
         //刷新验证码
-        function reloadCode(){
+        function reloadCode() {
             var time = new Date().getTime(); //加入时间参数，缓存才会认为是不同请求
-            $("#imagecode").attr('src',"<%=path%>/blog/imageGenerate?d="+time);
+            $("#imagecode").attr('src', "<%=path%>/blog/imageGenerate?d=" + time);
             <%--document.getElementById("imagecode").src = "<%=path%>/blog/imageGenerate?d="+time;--%>
         }
         //检查重复
+        //注意：此处若使用异步方法，则return go 返回的有可能是初始值，应为post方法等待url的返回结果，从而没有改变go的值
         function registerSubmit() {
             var gonext = false;
             var nickname = $("input[name='nickname']").val();
             var username = $("input[name='username']").val();
             var checkcode = $("input[name='checkcode']").val();
             var authorname = encodeURI(encodeURI(nickname));
-            var Url = '/blog/'+authorname+'/'+username+'/'+checkcode+'/registerSubmit';
-            $.post(Url, function (result) {
-                if(result['success']){
-                    gonext = true;
-                }
-                else{
-                    $('#accountInfo').html(result['message']).show();
-                    gonext = false;
+            var Url = '/blog/' + authorname + '/' + username + '/' + checkcode + '/registerSubmit';
+//            $.post(Url, function (result) {
+//                if(result['success']){
+//                    gonext = true;
+//                }
+//                else{
+//                    $('#accountInfo').html(result['message']).show();
+//                    gonext = false;
+//                }
+//            });
+            $.ajax({
+                url: Url,
+                async: false, // 注意此处需要同步，因为返回完数据后，下面才能
+                type: "POST",
+                dataType: "json",
+                success: function (result) {
+                    if (result['success']) {
+                        gonext = true;
+                    }
+                    else {
+                        $('#accountInfo').html(result['message']).show();
+                        gonext = false;
+                    }
                 }
             });
             return gonext;
@@ -44,12 +60,12 @@
     <h1>欢迎注册</h1>
     <%--<div id="accountInfo" style="visibility: hidden;">注册信息出错</div>--%>
     <%--onsubmit标签在提交提交表单是触发，函数 checkForm() 在提交按钮被点击时触发。此函数向用户显示一段消息。--%>
-    <form class="login-form" method="post" action="#" onsubmit="return registerSubmit()">
+    <form class="login-form" method="post" action="<%= path %>/blog/list" onclick="return registerSubmit()">
         <label>
-            <input type="text" name="nickname"  id="nickname" required placeholder="昵称">
+            <input type="text" name="nickname" id="nickname" required placeholder="昵称">
         </label>
         <label>
-            <input type="text" name="username" id="username"  required placeholder="登录账号">
+            <input type="text" name="username" id="username" required placeholder="登录账号">
         </label>
         <label>
             <input type="text" name="password" id="password" required placeholder="密码">
@@ -61,7 +77,7 @@
         </label>
         <input type="submit" value="注册">
     </form>
-    <a href="<%=path%>/blog/login" >已有账号，去登录</a>
+    <a href="<%=path%>/blog/login">已有账号，去登录</a>
 </section>
 <div id="accountInfo" style="display: none">注册信息出错!</div>
 </body>

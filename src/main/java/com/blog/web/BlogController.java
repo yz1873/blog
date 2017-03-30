@@ -94,9 +94,11 @@ public class BlogController {
     public SeckResult loginSubmit(@PathVariable("username") String username,
                                   @PathVariable("password") String password) {
         if (blogService.getByUsernameAndPassword(username,password) != null) {
+            System.out.println("验证通过！");
             return new SeckResult(true, "验证通过！");
         }
         else {
+            System.out.println("用户名不存在或密码出错！");
             return new SeckResult(false, "用户名不存在或密码出错！");
         }
     }
