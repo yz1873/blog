@@ -16,10 +16,16 @@ public interface AuthorDao {
      */
     String authorNameById(long authorId);
 
+    long authorIdByName(String username);
+
     Author getByUsername(String username);
 
     Author getByAuthorname(String authorName);
 
     Author getByUsernameAndPassword(@Param("username") String username,@Param("password") String password);
+
+    void addAuthor(@Param("authorname") String authorname,@Param("username") String username,@Param("password") String password);
+
+    void addManagerRole(long authorId);
 
 }

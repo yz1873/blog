@@ -31,9 +31,10 @@ public class AuthorDaoTest {
 
     @Test
     public void testName() throws Exception {
-        String uname = "李四";
+        String authorname = "王五";
+        String uname = "wangwu";
         String pass = "890924";
+        authorDao.addAuthor(authorname,uname,pass);
         System.out.println(authorDao.getByUsernameAndPassword(uname,pass));
-
     }
 }

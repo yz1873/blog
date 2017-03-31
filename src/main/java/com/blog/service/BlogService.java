@@ -55,4 +55,12 @@ public interface BlogService {
      */
     Author getByUsernameAndPassword(String username,String password);
 
+    /**
+     * 添加作者
+     * @param authorname
+     * @param username
+     * @param password
+     */
+    void addAuthor(String authorname,String username,String password);
+
 }

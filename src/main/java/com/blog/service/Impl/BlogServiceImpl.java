@@ -9,6 +9,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -61,5 +62,13 @@ public class BlogServiceImpl implements BlogService {
     @Override
     public Author getByUsernameAndPassword(String username, String password) {
         return authorDao.getByUsernameAndPassword(username,password);
+    }
+
+    @Transactional
+    @Override
+    public void addAuthor(String authorname, String username, String password) {
+        authorDao.addAuthor(authorname,username,password);
+        long id = authorDao.authorIdByName(username);
+        authorDao.addManagerRole(id);
     }
 }

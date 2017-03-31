@@ -111,8 +111,7 @@ public class BlogController {
      * @return
      */
     @RequestMapping(value = "/submit", method = RequestMethod.POST)
-    public String submit(String username, String password, HttpServletRequest request) {
-        request.getSession().setAttribute("username", username);
+    public String submit(String username, String password) {
         Subject subject = SecurityUtils.getSubject();
         UsernamePasswordToken token = new UsernamePasswordToken(username, password);
         try {
@@ -235,6 +234,23 @@ public class BlogController {
         return "register";
     }
 
+    @RequestMapping(value = "/registerSub", method = RequestMethod.POST)
+    public String registerSub(String nickname, String username, String password) {
+        blogService.addAuthor(nickname,username,password);
+        Subject subject = SecurityUtils.getSubject();
+        UsernamePasswordToken token = new UsernamePasswordToken(username, password);
+        try {
+            subject.login(token);
+        } catch (AuthenticationException e) {
+            token.clear();
+        }
+        return "redirect:/blog/finishRegister";
+    }
+
+    @RequestMapping(value = "/finishRegister", method = RequestMethod.GET)
+    public String finishRegister(Model model) {
+        return "finishRegister";
+    }
 
     /**
      * ajax请求返回能否注册
@@ -259,7 +275,6 @@ public class BlogController {
         boolean authorNameQualified = false;
         boolean checkcodeQualified = false;
         try {
-            request.setCharacterEncoding("gbk");
             if (blogService.getByUsername(username) != null) {
                 usernameQualified = true;
             }

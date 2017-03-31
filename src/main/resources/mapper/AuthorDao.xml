@@ -10,6 +10,11 @@
         WHERE author_id = #{authorId}
     </select>
 
+    <select id="authorIdByName" resultType="long" parameterType="String">
+        SELECT author_id FROM author
+        WHERE username = #{username}
+    </select>
+
     <select id="getByUsername" resultType="Author" parameterType="String">
         SELECT author_id,author_name,username,password FROM author
         WHERE username = #{username}
@@ -24,5 +29,15 @@
         SELECT author_id,author_name,username,password FROM author
         WHERE username = #{username} AND password = #{password}
     </select>
+
+    <insert id="addAuthor" parameterType="String">
+        INSERT INTO author(author_name,username,password)
+        VALUES (#{authorname},#{username},#{password})
+    </insert>
+
+    <insert id="addManagerRole" parameterType="long">
+        INSERT INTO author_role(author_id,role_id)
+        VALUES (#{authorId},2)
+    </insert>
 
 </mapper>
