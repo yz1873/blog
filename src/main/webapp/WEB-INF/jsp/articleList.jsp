@@ -25,14 +25,6 @@
         <a href="<%=path%>/blog/list">首页</a>
         <a href="<%=path%>/blog/aboutUs">关于我们</a>
 
-        <shiro:notAuthenticated>
-            <a class="login" href="<%=path%>/blog/register">注册</a>
-        </shiro:notAuthenticated>
-
-        <shiro:notAuthenticated>
-            <a class="login" href="<%=path%>/blog/login">登录</a>
-        </shiro:notAuthenticated>
-
         <shiro:authenticated>
             <a class="login" href="<%=path%>/blog/logout">退出登录</a>
         </shiro:authenticated>
@@ -52,7 +44,7 @@
     <div class="news-list">
         <div class="news-list-left">
 
-            <c:forEach items="${list}" var="ba">
+            <c:forEach items="${articleList}" var="ba">
                 <div class="news-list-item">
                     <div class="author-time">
                         <span>${ba.authorName}</span> 发表于 <span><fmt:formatDate value="${ba.createTime}"
@@ -67,8 +59,11 @@
                         </div>
                     </div>
                     <div class="setting">
-                        <shiro:hasRole name="admin">
+                        <shiro:hasRole name="manager">
                             <a class="update" href="#">删除</a>
+                        </shiro:hasRole>
+                        <shiro:hasRole name="manager">
+                            <a class="update" href="#">修改</a>
                         </shiro:hasRole>
                     </div>
                 </div>

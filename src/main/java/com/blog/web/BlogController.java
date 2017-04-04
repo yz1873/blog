@@ -49,9 +49,7 @@ public class BlogController {
      * @return
      */
     @RequestMapping(value = "/list", method = RequestMethod.GET)
-    public String list(Model model, HttpServletRequest request) {
-        String username = (String) request.getSession().getAttribute("username");
-        model.addAttribute("username", username);
+    public String list(Model model) {
         int limit = 20;
         //获取列表页
         List<Article> list = blogService.getArticleList(0, limit);
@@ -74,6 +72,25 @@ public class BlogController {
         model.addAttribute("list", list);
         return "list"; //根据前面配置的前缀和后缀，此处代表/WEB-INF/jsp/list.jsp
     }
+
+
+    /**
+     * 文章列表页按页码(按作者)
+     *
+     * @param model
+     * @return
+     */
+    @RequestMapping(value = "/articleList")
+    public String articleList(Model model, HttpServletRequest request) {
+        String username =(String)request.getSession().getAttribute("username");
+        long authorId = blogService.authorIdByName(username);
+        int limit = 20;
+        //获取列表页
+        List<Article> list = blogService.queryAllArticlesByAuthorId(authorId, 0, limit);
+        model.addAttribute("articleList", list);
+        return "articleList"; //根据前面配置的前缀和后缀，此处代表/WEB-INF/jsp/list.jsp
+    }
+
 
     /**
      * 登录界面
@@ -111,11 +128,12 @@ public class BlogController {
      * @return
      */
     @RequestMapping(value = "/submit", method = RequestMethod.POST)
-    public String submit(String username, String password) {
+    public String submit(String username, String password, HttpServletRequest request) {
         Subject subject = SecurityUtils.getSubject();
         UsernamePasswordToken token = new UsernamePasswordToken(username, password);
         try {
             subject.login(token);
+            request.getSession().setAttribute("username", username);
         } catch (AuthenticationException e) {
             token.clear();
         }

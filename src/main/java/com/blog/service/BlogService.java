@@ -23,6 +23,15 @@ public interface BlogService {
     List<Article> getArticleList(int offset, int limit);
 
     /**
+     * 返回本作者所有文章
+     * @param authorId
+     * @param offset
+     * @param limit
+     * @return
+     */
+    List<Article> queryAllArticlesByAuthorId(long authorId,int offset,int limit);
+
+    /**
      * 根据id返回文章
      * @return
      */
@@ -62,5 +71,12 @@ public interface BlogService {
      * @param password
      */
     void addAuthor(String authorname,String username,String password);
+
+    /**
+     * 根据username查id
+     * @param username
+     * @return
+     */
+    long authorIdByName(String username);
 
 }

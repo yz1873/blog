@@ -17,6 +17,14 @@
         limit #{offset},#{limit}
     </select>
 
+    <!--虽然queryAll返回的是list，当时list中存放的时article，故resultType填写article即可-->
+    <select id="queryAllArticlesByAuthorId" resultType="Article">
+        SELECT a.article_id,a.author_id,b.author_name,a.title,a.summary,a.content,a.create_time FROM article AS a LEFT JOIN author AS b ON a.author_id = b.author_id
+        WHERE a.author_id = #{authorId}
+        ORDER BY a.create_time DESC
+        limit #{offset},#{limit}
+    </select>
+
     <select id="countOfArticle" resultType="int">
         SELECT COUNT(title) FROM article
         GROUP BY article_id

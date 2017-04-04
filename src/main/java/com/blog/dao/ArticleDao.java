@@ -28,6 +28,14 @@ public interface ArticleDao {
     List<Article> queryAll(@Param("offset") int offset, @Param("limit") int limit);
 
     /**
+     * 按照位移查看一定数量的本作者的文章
+     * @param offset
+     * @param limit
+     * @return
+     */
+    List<Article> queryAllArticlesByAuthorId(@Param("authorId") long authorId,@Param("offset") int offset, @Param("limit") int limit);
+
+    /**
      * 查看数据库中文章总数
      * @return 文章数
      */

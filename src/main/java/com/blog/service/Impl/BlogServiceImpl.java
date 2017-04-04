@@ -64,6 +64,16 @@ public class BlogServiceImpl implements BlogService {
         return authorDao.getByUsernameAndPassword(username,password);
     }
 
+    @Override
+    public List<Article> queryAllArticlesByAuthorId(long authorId, int offset, int limit) {
+        return articleDao.queryAllArticlesByAuthorId(authorId, offset, limit);
+    }
+
+    @Override
+    public long authorIdByName(String username) {
+        return authorDao.authorIdByName(username);
+    }
+
     @Transactional
     @Override
     public void addAuthor(String authorname, String username, String password) {
