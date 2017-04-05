@@ -203,10 +203,21 @@ public class BlogController {
         return "ued";
     }
 
-//    @RequestMapping(value = "/submitArticle", method = RequestMethod.POST)
-//    public String submitArticle(String title, String summary,String contents) {
-//
-//    }
+    /**
+     * 新建文章
+     * @param authorId
+     * @param title
+     * @param summary
+     * @param contents
+     * @return
+     */
+    @RequestMapping(value = "/submitArticle", method = RequestMethod.POST)
+    public String submitArticle(String title, String summary,String contents, HttpServletRequest request) {
+        String username =(String)request.getSession().getAttribute("username");
+        long authorId = blogService.authorIdByName(username);
+        blogService.insertArticle(authorId,title,summary,contents);
+        return "redirect:/blog/list";
+    }
 
     /**
      * 生成验证码图片

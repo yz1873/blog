@@ -81,4 +81,10 @@ public class BlogServiceImpl implements BlogService {
         long id = authorDao.authorIdByName(username);
         authorDao.addManagerRole(id);
     }
+
+    @Transactional
+    @Override
+    public void insertArticle(long authorId, String title, String summary, String contents) {
+        articleDao.insertArticle(authorId,title,summary,contents);
+    }
 }

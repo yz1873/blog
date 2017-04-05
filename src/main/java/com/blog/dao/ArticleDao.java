@@ -42,10 +42,11 @@ public interface ArticleDao {
     int countOfArticle();
 
     /**
-     *
+     * 新增文章
+     * @param authorId
      * @param title
      * @param summary
      * @param contents
      */
-    void insertArticle(String title, String summary, String contents);
+    void insertArticle(@Param("authorId") long authorId, @Param("title") String title, @Param("summary") String summary, @Param("contents") String contents);
 }

@@ -79,4 +79,14 @@ public interface BlogService {
      */
     long authorIdByName(String username);
 
+
+    /**
+     * 新建文章
+     * @param authorId
+     * @param title
+     * @param summary
+     * @param contents
+     */
+    void insertArticle(long authorId, String title, String summary, String contents);
+
 }

@@ -30,4 +30,9 @@
         GROUP BY article_id
     </select>
 
+    <insert id="insertArticle">
+        INSERT INTO article(author_id,title,summary,content)
+        VALUES (#{authorId},#{title},#{summary},#{contents})
+    </insert>
+
 </mapper>

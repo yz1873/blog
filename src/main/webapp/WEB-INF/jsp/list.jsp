@@ -40,6 +40,10 @@
         <shiro:hasRole name="manager">
             <a class="login" href="<%=path%>/blog/articleList">我的文章列表</a>
         </shiro:hasRole>
+
+        <shiro:hasRole name="manager">
+            <a class="login" href="<%=path%>/blog/ued" target="_blank">写文章</a>
+        </shiro:hasRole>
     </div>
 </nav>
 
