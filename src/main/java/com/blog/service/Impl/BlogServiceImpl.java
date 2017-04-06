@@ -87,4 +87,14 @@ public class BlogServiceImpl implements BlogService {
     public void insertArticle(long authorId, String title, String summary, String contents) {
         articleDao.insertArticle(authorId,title,summary,contents);
     }
+
+    @Override
+    public void deleteArticle(long articleId) {
+        articleDao.deleteArticle(articleId);
+    }
+
+    @Override
+    public long authorIdByArticleId(long articleId) {
+        return articleDao.authorIdByArticleId(articleId);
+    }
 }

@@ -35,6 +35,7 @@
         </shiro:hasRole>
     </div>
 </nav>
+<img src="<%= basePath %>resources/images/bg.jpg" class="index-bg">
 <form action="<%=path%>/blog/submitArticle" method="post" class="basic-grey">
     <h1>文章编写</h1>
     <label>

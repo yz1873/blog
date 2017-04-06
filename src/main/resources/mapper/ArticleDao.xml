@@ -35,4 +35,14 @@
         VALUES (#{authorId},#{title},#{summary},#{contents})
     </insert>
 
+    <delete id="deleteArticle" parameterType="long">
+        DELETE FROM article
+        WHERE article_id = #{articleId}
+    </delete>
+
+    <select id="authorIdByArticleId" resultType="long" parameterType="long">
+        SELECT author_id FROM article
+        WHERE article_id = #{articleId}
+    </select>
+
 </mapper>

@@ -49,4 +49,17 @@ public interface ArticleDao {
      * @param contents
      */
     void insertArticle(@Param("authorId") long authorId, @Param("title") String title, @Param("summary") String summary, @Param("contents") String contents);
+
+    /**
+     * 根据文章id删除文章
+     * @param articleId
+     */
+    void deleteArticle(long articleId);
+
+    /**
+     * 根据articleId得到authorId
+     * @param articleId
+     * @return
+     */
+    long authorIdByArticleId(long articleId);
 }

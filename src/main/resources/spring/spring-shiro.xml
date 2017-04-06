@@ -75,6 +75,7 @@
                 /blog/list=anon
                 /blog/login=anon
                 /blog/articleList=authc
+                /blog/ued=authc
                 <!--/blog/aboutUs=authc-->
                 <!--和<property name="loginUrl" value="/blog/login"/>配合使用，
                 当用户没有登录时点击“关于我们”，会自动跳转到登录界面-->

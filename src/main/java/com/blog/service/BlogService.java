@@ -89,4 +89,18 @@ public interface BlogService {
      */
     void insertArticle(long authorId, String title, String summary, String contents);
 
+
+    /**
+     * 删除文章
+     * @param articleId
+     */
+    void deleteArticle(long articleId);
+
+    /**
+     * 根据articleId得到authorId
+     * @param articleId
+     * @return
+     */
+    long authorIdByArticleId(long articleId);
+
 }

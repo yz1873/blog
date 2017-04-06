@@ -147,10 +147,11 @@ public class BlogController {
      * @return
      */
     @RequestMapping(value = "/logout", method = RequestMethod.GET)
-    public String logout(Model model) {
+    public String logout(Model model, HttpServletRequest request) {
         Subject subject = SecurityUtils.getSubject();
         if (subject.isAuthenticated()) {
             subject.logout();
+            request.getSession().removeAttribute("username");
         }
         return "redirect:/blog/list";
     }
@@ -205,7 +206,6 @@ public class BlogController {
 
     /**
      * 新建文章
-     * @param authorId
      * @param title
      * @param summary
      * @param contents
@@ -264,12 +264,13 @@ public class BlogController {
     }
 
     @RequestMapping(value = "/registerSub", method = RequestMethod.POST)
-    public String registerSub(String nickname, String username, String password) {
+    public String registerSub(String nickname, String username, String password, HttpServletRequest request) {
         blogService.addAuthor(nickname,username,password);
         Subject subject = SecurityUtils.getSubject();
         UsernamePasswordToken token = new UsernamePasswordToken(username, password);
         try {
             subject.login(token);
+            request.getSession().setAttribute("username", username);
         } catch (AuthenticationException e) {
             token.clear();
         }
@@ -339,5 +340,21 @@ public class BlogController {
         model.addAttribute("article", article);
         return "content"; //根据前面配置的前缀和后缀，此处代表/WEB-INF/jsp/list.jsp
     }
+
+    @RequestMapping(value = "/{articleId}/delete", method = RequestMethod.GET)
+    public String articleDelete(Model model, @PathVariable("articleId") long articleId, HttpServletRequest request) {
+        String username =(String)request.getSession().getAttribute("username");
+        long sessionAuthorId = blogService.authorIdByName(username);
+        long authorId = blogService.authorIdByArticleId(articleId);
+        if (sessionAuthorId == authorId){
+            blogService.deleteArticle(articleId);
+            return "redirect:/blog/articleList";
+        }
+        else {
+            return "redirect:/blog/articleList";
+        }
+    }
+
+
 
 }

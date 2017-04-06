@@ -17,6 +17,18 @@
     <title>BLOG系统</title>
 
     <link type="text/css" rel="stylesheet" href="<%= basePath %>resources/css/list.css">
+
+    <script type="text/javascript">
+        function delete_confirm() {
+            var r = confirm("确定删除？")
+            if (r == true) {
+                return true;
+            }
+            else {
+                return false;
+            }
+        }
+    </script>
 </head>
 
 <body>
@@ -31,6 +43,10 @@
 
         <shiro:hasRole name="manager">
             <a class="login" href="<%=path%>/blog/articleList">我的文章列表</a>
+        </shiro:hasRole>
+
+        <shiro:hasRole name="manager">
+            <a class="login" href="<%=path%>/blog/ued">写文章</a>
         </shiro:hasRole>
     </div>
 </nav>
@@ -60,7 +76,8 @@
                     </div>
                     <div class="setting">
                         <shiro:hasRole name="manager">
-                            <a class="update" href="#">删除</a>
+                            <a class="update" href="<%=path%>/blog/${ba.articleId}/delete"
+                               onclick="return delete_confirm()">删除</a>
                         </shiro:hasRole>
                         <shiro:hasRole name="manager">
                             <a class="update" href="#">修改</a>

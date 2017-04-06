@@ -36,6 +36,14 @@
         <shiro:authenticated>
             <a class="login" href="<%=path%>/blog/logout">退出登录</a>
         </shiro:authenticated>
+
+        <shiro:hasRole name="manager">
+            <a class="login" href="<%=path%>/blog/articleList">我的文章列表</a>
+        </shiro:hasRole>
+
+        <shiro:hasRole name="manager">
+            <a class="login" href="<%=path%>/blog/ued">写文章</a>
+        </shiro:hasRole>
     </div>
 </nav>
 
@@ -57,14 +65,6 @@
                     <div class="news-content-des">
                         ${article.content}
                     </div>
-                </div>
-                <div class="setting">
-                    <shiro:hasAnyRoles name="admin,manager">
-                        <a class="update" href="#">删除</a>
-                    </shiro:hasAnyRoles>
-                    <shiro:hasRole name="manager">
-                        <a class="update" href="#">修改</a>
-                    </shiro:hasRole>
                 </div>
             </div>
 
