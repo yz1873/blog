@@ -68,4 +68,12 @@ public interface ArticleDao {
      * @return
      */
     long authorIdByArticleId(long articleId);
+
+    /**
+     * 修改文章
+     * @param title
+     * @param summary
+     * @param contents
+     */
+    void updateArticle(@Param("title") String title, @Param("summary") String summary, @Param("contents") String contents, @Param("articleId") long articleId);
 }

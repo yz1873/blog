@@ -109,6 +109,12 @@ public interface BlogService {
      */
     long authorIdByArticleId(long articleId);
 
-
+    /**
+     * 修改文章
+     * @param title
+     * @param summary
+     * @param contents
+     */
+    void updateArticle(String title,String summary,String contents,long articleId);
 
 }

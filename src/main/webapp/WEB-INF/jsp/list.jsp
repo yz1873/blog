@@ -17,6 +17,18 @@
     <title>BLOG系统</title>
 
     <link type="text/css" rel="stylesheet" href="<%= basePath %>resources/css/list.css">
+
+    <script type="text/javascript">
+        function delete_confirm() {
+            var r = confirm("确定删除？")
+            if (r == true) {
+                return true;
+            }
+            else {
+                return false;
+            }
+        }
+    </script>
 </head>
 
 <body>
@@ -61,6 +73,10 @@
                     <div class="author-time">
                         <span>${ba.authorName}</span> 发表于 <span><fmt:formatDate value="${ba.createTime}"
                                                                                 pattern="yyyy-MM-dd HH:mm:ss"/></span>
+                        <shiro:hasRole name="admin">
+                            <a class="update" href="<%=path%>/blog/${ba.articleId}/delete"
+                               onclick="return delete_confirm()">删除</a>
+                        </shiro:hasRole>
                     </div>
                     <div class="news-des">
                         <h3 class="news-title"><i></i><a href="<%=path%>/blog/${ba.articleId}/content">${ba.title}</a>
@@ -69,11 +85,6 @@
                         <div class="news-summary-des">
                                 ${ba.summary}
                         </div>
-                    </div>
-                    <div class="setting">
-                        <shiro:hasRole name="admin">
-                            <a class="update" href="#">删除</a>
-                        </shiro:hasRole>
                     </div>
                 </div>
             </c:forEach>

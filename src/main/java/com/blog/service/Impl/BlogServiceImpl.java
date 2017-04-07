@@ -102,4 +102,9 @@ public class BlogServiceImpl implements BlogService {
     public long authorIdByArticleId(long articleId) {
         return articleDao.authorIdByArticleId(articleId);
     }
+
+    @Override
+    public void updateArticle(String title, String summary, String contents, long articleId) {
+        articleDao.updateArticle(title,summary,contents,articleId);
+    }
 }

@@ -65,6 +65,13 @@
                     <div class="author-time">
                         <span>${ba.authorName}</span> 发表于 <span><fmt:formatDate value="${ba.createTime}"
                                                                                 pattern="yyyy-MM-dd HH:mm:ss"/></span>
+                        <shiro:hasRole name="manager">
+                            <a class="update" href="<%=path%>/blog/${ba.articleId}/delete"
+                               onclick="return delete_confirm()">删除</a>
+                        </shiro:hasRole>
+                        <shiro:hasRole name="manager">
+                            <a class="update" href="<%=path%>/blog/${ba.articleId}/update">修改</a>
+                        </shiro:hasRole>
                     </div>
                     <div class="news-des">
                         <h3 class="news-title"><i></i><a href="<%=path%>/blog/${ba.articleId}/content">${ba.title}</a>
@@ -73,15 +80,6 @@
                         <div class="news-summary-des">
                                 ${ba.summary}
                         </div>
-                    </div>
-                    <div class="setting">
-                        <shiro:hasRole name="manager">
-                            <a class="update" href="<%=path%>/blog/${ba.articleId}/delete"
-                               onclick="return delete_confirm()">删除</a>
-                        </shiro:hasRole>
-                        <shiro:hasRole name="manager">
-                            <a class="update" href="#">修改</a>
-                        </shiro:hasRole>
                     </div>
                 </div>
             </c:forEach>

@@ -66,7 +66,7 @@ public class BlogController {
         List<Article> list = blogService.getArticleList(offset, limit);
         model.addAttribute("list", list);
         int articleNum = blogService.getArticleCount();
-        int pageNum = articleNum/limit;
+        int pageNum = articleNum / limit;
         model.addAttribute("pageNum", pageNum);
         model.addAttribute("curPage", pageNumber);
         return "list"; //根据前面配置的前缀和后缀，此处代表/WEB-INF/jsp/list.jsp
@@ -91,7 +91,7 @@ public class BlogController {
      */
     @RequestMapping(value = "/articleList/{pageNumber}")
     public String articleListByPageNumber(Model model, @PathVariable("pageNumber") int pageNumber, HttpServletRequest request) {
-        String username =(String)request.getSession().getAttribute("username");
+        String username = (String) request.getSession().getAttribute("username");
         long authorId = blogService.authorIdByName(username);
         int limit = 10;
         int offset = pageNumber * limit;
@@ -99,7 +99,7 @@ public class BlogController {
         List<Article> list = blogService.queryAllArticlesByAuthorId(authorId, offset, limit);
         model.addAttribute("articleList", list);
         int articleNumByAuthor = blogService.countOfArticleByAuthorId(authorId);
-        int pageNum = articleNumByAuthor/limit;
+        int pageNum = articleNumByAuthor / limit;
         model.addAttribute("pageNum", pageNum);
         model.addAttribute("curPage", pageNumber);
         return "articleList";
@@ -124,11 +124,10 @@ public class BlogController {
     @ResponseBody //当springmvc看到这个注解时，会试图将我们的返回类型包装成json
     public SeckResult loginSubmit(@PathVariable("username") String username,
                                   @PathVariable("password") String password) {
-        if (blogService.getByUsernameAndPassword(username,password) != null) {
+        if (blogService.getByUsernameAndPassword(username, password) != null) {
             System.out.println("验证通过！");
             return new SeckResult(true, "验证通过！");
-        }
-        else {
+        } else {
             System.out.println("用户名不存在或密码出错！");
             return new SeckResult(false, "用户名不存在或密码出错！");
         }
@@ -220,16 +219,17 @@ public class BlogController {
 
     /**
      * 新建文章
+     *
      * @param title
      * @param summary
      * @param contents
      * @return
      */
     @RequestMapping(value = "/submitArticle", method = RequestMethod.POST)
-    public String submitArticle(String title, String summary,String contents, HttpServletRequest request) {
-        String username =(String)request.getSession().getAttribute("username");
+    public String submitArticle(String title, String summary, String contents, HttpServletRequest request) {
+        String username = (String) request.getSession().getAttribute("username");
         long authorId = blogService.authorIdByName(username);
-        blogService.insertArticle(authorId,title,summary,contents);
+        blogService.insertArticle(authorId, title, summary, contents);
         return "redirect:/blog/list";
     }
 
@@ -277,9 +277,18 @@ public class BlogController {
         return "register";
     }
 
+    /**
+     * 注册提交
+     *
+     * @param nickname
+     * @param username
+     * @param password
+     * @param request
+     * @return
+     */
     @RequestMapping(value = "/registerSub", method = RequestMethod.POST)
     public String registerSub(String nickname, String username, String password, HttpServletRequest request) {
-        blogService.addAuthor(nickname,username,password);
+        blogService.addAuthor(nickname, username, password);
         Subject subject = SecurityUtils.getSubject();
         UsernamePasswordToken token = new UsernamePasswordToken(username, password);
         try {
@@ -345,7 +354,13 @@ public class BlogController {
         return new SeckResult(false, "未知错误！");
     }
 
-
+    /**
+     * 查看文章详情
+     *
+     * @param model
+     * @param articleId
+     * @return
+     */
     @RequestMapping(value = "/{articleId}/content", method = RequestMethod.GET)
     public String articleById(Model model, @PathVariable("articleId") int articleId) {
 
@@ -355,20 +370,70 @@ public class BlogController {
         return "content"; //根据前面配置的前缀和后缀，此处代表/WEB-INF/jsp/list.jsp
     }
 
+    /**
+     * 根据文章id删除相应文章
+     *
+     * @param articleId
+     * @param request
+     * @return
+     */
     @RequestMapping(value = "/{articleId}/delete", method = RequestMethod.GET)
-    public String articleDelete(Model model, @PathVariable("articleId") long articleId, HttpServletRequest request) {
-        String username =(String)request.getSession().getAttribute("username");
+    public String articleDelete(@PathVariable("articleId") long articleId, HttpServletRequest request) {
+        String username = (String) request.getSession().getAttribute("username");
         long sessionAuthorId = blogService.authorIdByName(username);
         long authorId = blogService.authorIdByArticleId(articleId);
-        if (sessionAuthorId == authorId){
+        Subject currentUser = SecurityUtils.getSubject();
+//        当前角色为管理员时
+        if(currentUser.hasRole("admin")) {
             blogService.deleteArticle(articleId);
-            return "redirect:/blog/articleList";
+            return "redirect:/blog/list";
         }
+//        当前角色不是管理员时，校验是不是作者本人
         else {
+            if (sessionAuthorId == authorId) {
+                blogService.deleteArticle(articleId);
+                return "redirect:/blog/articleList";
+            } else {
+                return "redirect:/blog/articleList";
+            }
+        }
+    }
+
+    /**
+     * 根据文章ID修改相关文章
+     *
+     * @param model
+     * @param articleId
+     * @param request
+     * @return
+     */
+    @RequestMapping(value = "/{articleId}/update", method = RequestMethod.GET)
+    public String articleUpdate(Model model, @PathVariable("articleId") long articleId, HttpServletRequest request) {
+        String username = (String) request.getSession().getAttribute("username");
+        long sessionAuthorId = blogService.authorIdByName(username);
+        long authorId = blogService.authorIdByArticleId(articleId);
+        if (sessionAuthorId == authorId) {
+            Article article = blogService.getArticleById(articleId);
+            model.addAttribute("article", article);
+            return "uedUpdate";
+        } else {
             return "redirect:/blog/articleList";
         }
     }
 
 
-
+    /**
+     * 新建文章
+     *
+     * @param title
+     * @param summary
+     * @param contents
+     * @return
+     */
+    @RequestMapping(value = "/{articleId}/submitArticleUpdate", method = RequestMethod.POST)
+    public String submitArticleUpdate(@PathVariable("articleId") long articleId,
+                                      String title, String summary, String contents) {
+        blogService.updateArticle(title, summary, contents, articleId);
+        return "redirect:/blog/articleList";
+    }
 }
