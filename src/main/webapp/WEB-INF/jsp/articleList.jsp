@@ -105,7 +105,9 @@
             <c:if test="${curPage<pageNum}">
                 <a href="<%=path%>/blog/articleList/${curPage+1}">下一页</a>
             </c:if>
-            <a href="<%=path%>/blog/articleList/${pageNum}">尾页</a>
+            <c:if test="${pageNum>0}">
+                <a href="<%=path%>/blog/list/${pageNum}">尾页</a>
+            </c:if>
         </div>
         <div class="page">
             第${curPage+1}页/共${pageNum+1}页
