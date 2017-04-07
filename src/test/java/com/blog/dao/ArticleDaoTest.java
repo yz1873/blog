@@ -16,7 +16,7 @@ import java.util.List;
 //配置spring和junit整合
 @RunWith(SpringJUnit4ClassRunner.class)
 //告诉junit spring配置文件
-@ContextConfiguration({"classpath:spring/spring-dao.xml"})
+@ContextConfiguration({"classpath:spring/spring-dao.xml","classpath:spring/spring-shiro.xml"})
 
 public class ArticleDaoTest {
 
@@ -26,9 +26,7 @@ public class ArticleDaoTest {
 
     @Test
     public void testQueryById() throws Exception {
-        long articleId = 1000;
-        Article article = articleDao.queryById(articleId);
-        System.out.println(article);
+
         System.out.println(articleDao.countOfArticle());
     }
 

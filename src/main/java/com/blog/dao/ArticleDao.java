@@ -42,6 +42,12 @@ public interface ArticleDao {
     int countOfArticle();
 
     /**
+     * 根据authorid查看该作者数据库中文章总数
+     * @return 文章数
+     */
+    int countOfArticleByAuthorId(long authorId);
+
+    /**
      * 新增文章
      * @param authorId
      * @param title

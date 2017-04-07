@@ -35,6 +35,11 @@ public class BlogServiceImpl implements BlogService {
     }
 
     @Override
+    public int countOfArticleByAuthorId(long authorId) {
+        return articleDao.countOfArticleByAuthorId(authorId);
+    }
+
+    @Override
     public Article getArticleById(long ArticleId) {
         return articleDao.queryById(ArticleId);
     }

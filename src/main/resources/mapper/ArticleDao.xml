@@ -26,8 +26,12 @@
     </select>
 
     <select id="countOfArticle" resultType="int">
-        SELECT COUNT(title) FROM article
-        GROUP BY article_id
+        SELECT COUNT(1) FROM article
+    </select>
+
+    <select id="countOfArticleByAuthorId" resultType="int" parameterType="long">
+        SELECT COUNT(1) FROM article
+        WHERE author_id = #{authorId}
     </select>
 
     <insert id="insertArticle">

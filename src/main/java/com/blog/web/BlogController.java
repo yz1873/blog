@@ -45,16 +45,11 @@ public class BlogController {
     /**
      * 文章列表页按页码
      *
-     * @param model
      * @return
      */
     @RequestMapping(value = "/list", method = RequestMethod.GET)
-    public String list(Model model) {
-        int limit = 20;
-        //获取列表页
-        List<Article> list = blogService.getArticleList(0, limit);
-        model.addAttribute("list", list);
-        return "list"; //根据前面配置的前缀和后缀，此处代表/WEB-INF/jsp/list.jsp
+    public String list() {
+        return "redirect:/blog/list/0";
     }
 
     /**
@@ -65,11 +60,15 @@ public class BlogController {
      */
     @RequestMapping(value = "/list/{pageNumber}", method = RequestMethod.GET)
     public String listByPageNumber(Model model, @PathVariable("pageNumber") int pageNumber) {
-        int limit = 20;
+        int limit = 10;
         int offset = pageNumber * limit;
         //获取列表页
         List<Article> list = blogService.getArticleList(offset, limit);
         model.addAttribute("list", list);
+        int articleNum = blogService.getArticleCount();
+        int pageNum = articleNum/limit;
+        model.addAttribute("pageNum", pageNum);
+        model.addAttribute("curPage", pageNumber);
         return "list"; //根据前面配置的前缀和后缀，此处代表/WEB-INF/jsp/list.jsp
     }
 
@@ -77,18 +76,33 @@ public class BlogController {
     /**
      * 文章列表页按页码(按作者)
      *
-     * @param model
      * @return
      */
     @RequestMapping(value = "/articleList")
-    public String articleList(Model model, HttpServletRequest request) {
+    public String articleList() {
+        return "redirect:/blog/articleList/0";
+    }
+
+    /**
+     * 文章列表页按页码(按作者)
+     *
+     * @param model
+     * @return
+     */
+    @RequestMapping(value = "/articleList/{pageNumber}")
+    public String articleListByPageNumber(Model model, @PathVariable("pageNumber") int pageNumber, HttpServletRequest request) {
         String username =(String)request.getSession().getAttribute("username");
         long authorId = blogService.authorIdByName(username);
-        int limit = 20;
+        int limit = 10;
+        int offset = pageNumber * limit;
         //获取列表页
-        List<Article> list = blogService.queryAllArticlesByAuthorId(authorId, 0, limit);
+        List<Article> list = blogService.queryAllArticlesByAuthorId(authorId, offset, limit);
         model.addAttribute("articleList", list);
-        return "articleList"; //根据前面配置的前缀和后缀，此处代表/WEB-INF/jsp/list.jsp
+        int articleNumByAuthor = blogService.countOfArticleByAuthorId(authorId);
+        int pageNum = articleNumByAuthor/limit;
+        model.addAttribute("pageNum", pageNum);
+        model.addAttribute("curPage", pageNumber);
+        return "articleList";
     }
 
 

@@ -19,6 +19,18 @@
     <script type="text/javascript" src="<%= basePath %>ueditor/ueditor.config.js"></script>
 
     <script type="text/javascript" src="<%= basePath %>ueditor/ueditor.all.js"></script>
+
+    <script type="text/javascript">
+        function submit_confirm() {
+            var r = confirm("确定提交？")
+            if (r == true) {
+                return true;
+            }
+            else {
+                return false;
+            }
+        }
+    </script>
 </head>
 <body>
 <nav class="navbar">
@@ -54,7 +66,7 @@
             UE.getEditor('container', {initialFrameWidth: null});
         </script>
     </label>
-    <input type="submit" value="编辑完成" class="button"/>
+    <input type="submit" value="编辑完成" class="button" onclick="return submit_confirm()"/>
 </form>
 </body>
 </html>

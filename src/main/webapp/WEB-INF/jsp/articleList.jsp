@@ -99,6 +99,20 @@
             </div>
         </div>
 
+        <div class="page">
+            <a href="<%=path%>/blog/articleList/0">首页</a>
+            <c:if test="${curPage>0}">
+                <a href="<%=path%>/blog/articleList/${curPage-1}">上一页</a>
+            </c:if>
+            <c:if test="${curPage<pageNum}">
+                <a href="<%=path%>/blog/articleList/${curPage+1}">下一页</a>
+            </c:if>
+            <a href="<%=path%>/blog/articleList/${pageNum}">尾页</a>
+        </div>
+        <div class="page">
+            第${curPage+1}页/共${pageNum+1}页
+        </div>
+
         <footer class="copyright">
             Copyright &nbsp; 2017 YuZhang All rights reserved.
         </footer>

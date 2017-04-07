@@ -17,6 +17,12 @@ public interface BlogService {
     int getArticleCount();
 
     /**
+     * 根据authorid查看该作者数据库中文章总数
+     * @return 文章数
+     */
+    int countOfArticleByAuthorId(long authorId);
+
+    /**
      * 返回文章列表
      * @return
      */
@@ -102,5 +108,7 @@ public interface BlogService {
      * @return
      */
     long authorIdByArticleId(long articleId);
+
+
 
 }
