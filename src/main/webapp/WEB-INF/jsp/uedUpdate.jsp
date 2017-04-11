@@ -20,8 +20,18 @@
 
     <script type="text/javascript" src="<%= basePath %>ueditor/ueditor.all.js"></script>
 
+    <script src="http://cdn.static.runoob.com/libs/jquery/2.1.1/jquery.min.js"></script>
+
     <script type="text/javascript">
         function submit_confirm() {
+            if($("input[name='title']").val() == ""){
+                alert("标题不能为空！");
+                return false;
+            }
+            if($("textarea[name='contents']").val() == ""){
+                alert("内容不能为空！");
+                return false;
+            }
             var r = confirm("确定提交？")
             if (r == true) {
                 return true;

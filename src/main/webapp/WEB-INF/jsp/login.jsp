@@ -53,7 +53,7 @@
 <section class="login-form-wrap">
     <h1>欢迎登陆</h1>
 
-    <form class="login-form" method="post" action="<%= path %>/blog/submit" onclick="return loginSubmit()">
+    <form class="login-form" method="post" action="<%= path %>/blog/submit" onsubmit="return loginSubmit()">
         <label>
             <input type="text" name="username" required placeholder="账号">
         </label>

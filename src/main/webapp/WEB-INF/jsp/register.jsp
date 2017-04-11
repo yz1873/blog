@@ -62,7 +62,7 @@
     <h1>欢迎注册</h1>
     <%--<div id="accountInfo" style="visibility: hidden;">注册信息出错</div>--%>
     <%--onsubmit标签在提交提交表单是触发，函数 checkForm() 在提交按钮被点击时触发。此函数向用户显示一段消息。--%>
-    <form class="login-form" method="post" action="<%= path %>/blog/registerSub" onclick="return registerSubmit()">
+    <form class="login-form" method="post" action="<%= path %>/blog/registerSub" onsubmit="return registerSubmit()">
         <label>
             <input type="text" name="nickname" id="nickname" required placeholder="昵称">
         </label>
