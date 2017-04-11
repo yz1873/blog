@@ -16,7 +16,7 @@
             var go = false;
             var username = $("input[name='username']").val();
             var password = $("input[name='password']").val();
-            var Url = '/blog/' + username + '/' + password + '/loginSubmit';
+            var Url = '/blog/blog/' + username + '/' + password + '/loginSubmit';
 //注意：此处若使用异步方法，则return go 返回的有可能是初始值，应为post方法等待url的返回结果，从而没有改变go的值
 //      $.post(Url, function (result) {
 //        if(result['success']){

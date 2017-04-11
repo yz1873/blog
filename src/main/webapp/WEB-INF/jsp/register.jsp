@@ -28,7 +28,7 @@
             var username = $("input[name='username']").val();
             var checkcode = $("input[name='checkcode']").val();
             var authorname = encodeURI(encodeURI(nickname));
-            var Url = '/blog/' + authorname + '/' + username + '/' + checkcode + '/registerSubmit';
+            var Url = '/blog/blog/' + authorname + '/' + username + '/' + checkcode + '/registerSubmit';
 //            $.post(Url, function (result) {
 //                if(result['success']){
 //                    gonext = true;
