@@ -1,5 +1,7 @@
 <html>
+<head>
+    <meta http-equiv="Refresh" content="0; URL=/blog/list">
+</head>
 <body>
-<h2>Hello World!</h2>
 </body>
 </html>

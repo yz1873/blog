@@ -27,14 +27,10 @@ public class ArticleDaoTest {
     @Test
     public void testQueryById() throws Exception {
 
-        System.out.println(articleDao.countOfArticle());
     }
 
     @Test
     public void testQueryAll() throws Exception {
-        List<Article> articles = articleDao.queryAll(0, 100);
-        for (Article a : articles) {
-            System.out.println(a);
-        }
+
     }
 }

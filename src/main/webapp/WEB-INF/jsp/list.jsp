@@ -103,7 +103,9 @@
         </div>
 
         <div class="page">
-            <a href="<%=path%>/blog/list/0">首页</a>
+            <c:if test="${pageNum>0}">
+                <a href="<%=path%>/blog/list/0">首页</a>
+            </c:if>
             <c:if test="${curPage>0}">
                 <a href="<%=path%>/blog/list/${curPage-1}">上一页</a>
             </c:if>
@@ -111,7 +113,7 @@
                 <a href="<%=path%>/blog/list/${curPage+1}">下一页</a>
             </c:if>
             <c:if test="${pageNum>0}">
-            <a href="<%=path%>/blog/list/${pageNum}">尾页</a>
+                <a href="<%=path%>/blog/list/${pageNum}">尾页</a>
             </c:if>
         </div>
         <div class="page">

@@ -98,7 +98,9 @@
         </div>
 
         <div class="page">
-            <a href="<%=path%>/blog/articleList/0">首页</a>
+            <c:if test="${pageNum>0}">
+                <a href="<%=path%>/blog/articleList/0">首页</a>
+            </c:if>
             <c:if test="${curPage>0}">
                 <a href="<%=path%>/blog/articleList/${curPage-1}">上一页</a>
             </c:if>

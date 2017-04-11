@@ -25,16 +25,7 @@ public class AuthorDaoTest {
     @Test
     public void testAuthorNameById() throws Exception {
         long authorId = 1;
-        String authorName = authorDao.authorNameById(authorId);
-        System.out.println(authorName);
+
     }
 
-    @Test
-    public void testName() throws Exception {
-        String authorname = "王五";
-        String uname = "wangwu";
-        String pass = "890924";
-        authorDao.addAuthor(authorname,uname,pass);
-        System.out.println(authorDao.getByUsernameAndPassword(uname,pass));
-    }
 }
