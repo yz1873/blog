@@ -12,6 +12,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>新建文章</title>
 
+    <%--<script type="text/javascript">--%>
+        <%--window.UEDITOR_HOME_URL = "<%= basePath %>ueditor/";--%>
+    <%--</script>--%>
+
     <link type="text/css" rel="stylesheet" href="<%= basePath %>resources/css/ued.css">
 
     <script type="text/javascript" src="<%= basePath %>ueditor/lang/zh-cn/zh-cn.js"></script>
@@ -23,6 +27,7 @@
     <script src="http://cdn.static.runoob.com/libs/jquery/2.1.1/jquery.min.js"></script>
 
     <script type="text/javascript">
+
         function submit_confirm() {
             if($("input[name='title']").val() == ""){
                 alert("标题不能为空！");

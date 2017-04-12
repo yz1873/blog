@@ -125,10 +125,8 @@ public class BlogController {
     public SeckResult loginSubmit(@PathVariable("username") String username,
                                   @PathVariable("password") String password) {
         if (blogService.getByUsernameAndPassword(username, password) != null) {
-            System.out.println("验证通过！");
             return new SeckResult(true, "验证通过！");
         } else {
-            System.out.println("用户名不存在或密码出错！");
             return new SeckResult(false, "用户名不存在或密码出错！");
         }
     }
@@ -191,9 +189,8 @@ public class BlogController {
     public void config(HttpServletRequest request, HttpServletResponse response) {
 
         response.setContentType("application/json");
-        String rootPath = request.getSession()
-                .getServletContext().getRealPath("/");
-
+        String rootPath = request.getSession().getServletContext().getRealPath("/");
+        System.out.println("contriller中的rootPath为：" + rootPath);
         try {
             String exec = new ActionEnter(request, rootPath).exec();
             PrintWriter writer = response.getWriter();
@@ -203,7 +200,6 @@ public class BlogController {
         } catch (IOException e) {
             e.printStackTrace();
         }
-
     }
 
     /**

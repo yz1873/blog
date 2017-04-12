@@ -8,8 +8,8 @@
     "imageCompressEnable": true, /* 是否压缩图片,默认是true */
     "imageCompressBorder": 1600, /* 图片压缩最长边限制 */
     "imageInsertAlign": "none", /* 插入的图片浮动方式 */
-    "imageUrlPrefix": "", /* 图片访问路径前缀 */
-    /*E:\blog\target\blog\ueditor\jsp\upload\image\20170407
+    "imageUrlPrefix": "/blog", /* 图片访问路径前缀 */
+    /* E:\blog\target\blog\ueditor\jsp\upload\image\20170407
    img src="/ueditor/jsp/upload/image/20170407/1491550569134072754.png"
    http://localhost:8080/ueditor/jsp/upload/image/20170407/1491579140478076079.png */
     "imagePathFormat": "/ueditor/jsp/upload/image/{yyyy}{mm}{dd}/{time}{rand:6}",

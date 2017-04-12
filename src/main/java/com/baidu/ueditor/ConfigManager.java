@@ -172,6 +172,10 @@ public final class ConfigManager {
 	
 	private String getConfigPath () {
 //		return this.parentPath + File.separator + ConfigManager.configFileName;
+		System.out.println("根目录为："+this.rootPath);
+		System.out.println("目录为："+this.rootPath
+				+ File.separator + "conf"
+				+ File.separator + ConfigManager.configFileName);
 		return this.rootPath
 				+ File.separator + "conf"
 				+ File.separator + ConfigManager.configFileName;
